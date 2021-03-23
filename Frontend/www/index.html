@@ -37,6 +37,30 @@
     </div>
 </section>
 <div id="menu" class="menuHidden">
+    <div class="group buttonInMenu">
+        <div class="item">
+            <button class="btn">Життєпис</button>
+        </div>
+        <div class="item">
+            <button class="btn">Творчість</button>
+        </div>
+        <div class="item">
+            <button class="btn">Філософія</button>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener("mousemove", parallax);
+
+        function parallax(e) {
+            this.querySelectorAll(".item").forEach(layer => {
+                const speed = 5;
+                const x = (window.innerWidth - e.pageX * speed) / 100;
+                const y = (window.innerHeight - e.pageY * speed) / 100;
+
+                layer.style.transform = `translateX(${x}px) translateY(${y}px)`
+            })
+        }
+    </script>
 </div>
 <script
         src="https://code.jquery.com/jquery-3.5.1.min.js"

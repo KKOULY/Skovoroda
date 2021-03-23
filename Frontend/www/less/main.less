@@ -69,17 +69,42 @@ section {
 }
 #menu {
   transition: all 1s ease;
+  box-shadow: 30px 0 20px rgba(24, 24, 24, 1);
   z-index: 2;
   background-color: #181818;
   position: fixed;
   height: 100%;
   top: 0;
   left: 0;
+  .group {
+    display: none;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    .item {
+      font-family: 'Bellota', cursive;
+      text-align: center;
+      margin-bottom: 5px;
+      .btn {
+        width: 200px;
+        transition: all 1s ease;
+        border-width: 5px;
+        border-color: white;
+        color: white;
+        font-size: xx-large;
+      }
+    }
+  }
 }
 .menuHidden{
+  visibility: hidden;
   width: 0;
 }
 .menuVisible{
+  visibility: visible;
   width: 100%;
 }
 
