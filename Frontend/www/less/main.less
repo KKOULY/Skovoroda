@@ -43,7 +43,6 @@ section {
     font-family: 'Bellota', cursive;
     text-align: justify;
     background: #181818;
-    z-index: 1;
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 50px;
@@ -52,9 +51,11 @@ section {
     border-top-width: 20px;
     bottom: -20px;
     min-height: 100vh;
+    z-index: 1;
   }
   #model{
     z-index: 0;
+    pointer-events: none;
     position: absolute;
   }
 }
