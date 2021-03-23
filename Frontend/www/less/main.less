@@ -6,7 +6,8 @@
 }
 html{
   min-width: 400px;
-  overflow: paged-x-controls;
+  overflow-x: auto;
+  overflow-y:hidden;
 }
 body {
   background-color: #181818;
@@ -18,13 +19,14 @@ body {
 }
 
 section {
+  overflow-x: hidden;
+  overflow-y:auto;
   //filter: blur(1px);
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  overflow: paged-y-controls;
 
   .background-item {
     position: relative;
