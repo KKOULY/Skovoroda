@@ -1,32 +1,28 @@
 @import "song";
+@background-color: #181818;
+@foreground-color: #b3b3b3;
+@width: 10em;
+@height: 2.8em;
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: 'Bellota', cursive;
 }
 html{
   min-width: 400px;
-  overflow-x: auto;
-  overflow-y:hidden;
 }
 body {
-  background-color: #181818;
+  background-color: @background-color;
 }
-
-.background-item {
-  font-size: 60px;
-  color: #b3b3b3;
+.footer{
+  height: 50px;
+  color: @foreground-color;
+  background-color: @background-color;
+  box-shadow: 0 -30px 20px @background-color;
 }
 
 section {
-  overflow-x: hidden;
-  overflow-y:auto;
-  //filter: blur(1px);
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
   .background-item {
     position: relative;
@@ -39,72 +35,106 @@ section {
     @media(max-width: 600px){
       font-size: large;
     }
-    color: white;
-    font-family: 'Bellota', cursive;
+    color: @foreground-color;
     text-align: justify;
-    background: #181818;
+    background: @background-color;
     padding-left: 50px;
     padding-right: 50px;
     padding-top: 50px;
-    margin-top:200vh;
-    box-shadow: 0 -30px 20px rgba(24, 24, 24, 1);
+    margin-top:100vh;
+    box-shadow: 0 -30px 20px @background-color;
     border-top-width: 20px;
     bottom: -20px;
     min-height: 100vh;
+    position: relative;
     z-index: 1;
   }
   #model{
     z-index: 0;
     pointer-events: none;
-    position: absolute;
+    position: fixed;
+    height: 70vh;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
   }
 }
-
 .btn-menu {
   position: absolute;
-  top: 10px;
   left: 10px;
-  color: #b3b3b3;
+  color: @foreground-color;
   z-index: 3;
 }
+
+
 #menu {
   transition: all 1s ease;
-  box-shadow: 30px 0 20px rgba(24, 24, 24, 1);
+  box-shadow: 30px 0 20px @background-color;
   z-index: 2;
-  background-color: #181818;
+  background-color: @background-color;
   position: fixed;
   height: 100%;
   top: 0;
   left: 0;
+  overflow: hidden;
   .group {
     display: none;
-    margin: 0;
     position: absolute;
     top: 50%;
     left: 50%;
     margin-right: -50%;
     transform: translate(-50%, -50%);
+
     .item {
-      font-family: 'Bellota', cursive;
       text-align: center;
-      margin-bottom: 5px;
-      .btn {
-        width: 200px;
-        transition: all 1s ease;
-        border-width: 5px;
-        border-color: white;
-        color: white;
-        font-size: xx-large;
-      }
+      margin-bottom: 10px;
+      @import "btn-menu";
+    }
+    hr{
+      border-color: @foreground-color;
     }
   }
+  .background-image{
+    transition: opacity 1s;
+    position: absolute;
+    filter : blur(3px);
+    width: 10vw;
+  }
 }
-.menuHidden{
+
+
+.menuHidden {
   visibility: hidden;
   width: 0;
+  .background-image{
+    opacity: 0;
+  }
 }
-.menuVisible{
+
+.menuVisible {
   visibility: visible;
   width: 100%;
+  .background-image{
+    opacity: 1;
+  }
 }
+
+::-webkit-scrollbar {
+  width: 12px; /* ширина для вертикального скролла */
+  height: 8px; /* высота для горизонтального скролла */
+  background-color: lighten(@background-color, 10%);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: lighten(@background-color, 20%);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: lighten(@background-color, 30%);
+}
+
+.modal-open {
+  overflow: hidden;
+}
+
 
