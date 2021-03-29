@@ -13,15 +13,4 @@ $("#openMenuButton").click(function () {
     }
 });
 
-document.onmousemove = function (){
-    document.getElementsByTagName('html')[0].insertAdjacentHTML('beforeEnd', '<img src="images/cursor.svg" id="curs">');
-    var curs = document.getElementById('curs');
-    curs.style.zIndex = '5';
-    curs.style.position = 'fixed';
-    curs.style.pointerEvents = 'none';
-    document.onmousemove = function(event){
-        curs.style.left = event.clientX -9+'px';
-        curs.style.top = event.clientY -9+'px';
-    }
-}
 },{}]},{},[1]);
