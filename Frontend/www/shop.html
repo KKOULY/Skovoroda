@@ -25,28 +25,6 @@
 
 </head>
 <body>
-<script>
-    document.onmousemove = function (){
-        document.getElementsByTagName('html')[0].insertAdjacentHTML('beforeEnd', '<img src="images/cursor.svg" id="curs">');
-        var curs = document.getElementById('curs');
-        curs.style.zIndex = '5';
-        curs.style.position = 'fixed';
-        curs.style.pointerEvents = 'none';
-        document.onmousemove = function(event){
-            curs.style.left = event.clientX -9+'px';
-            curs.style.top = event.clientY -9+'px';
-        }
-    }
-    document.onmouseenter = function () {
-        var curs = document.getElementById('curs');
-        if(curs !== null)
-            curs.style.visibility = 'visible';
-    }
-    document.onmouseleave = function () {
-        var curs = document.getElementById('curs');
-        curs.style.visibility = 'hidden';
-    }
-</script>
 <div class="footer sticky-top d-flex justify-content-center align-items-center">
     <div class="btn btn-menu" id="openMenuButton" style="left: 10px">
         <svg xmlns="http://www.w3.org/2000/svg" height="30px" viewBox="0 0 24 24" width="30px" fill=currentColor>

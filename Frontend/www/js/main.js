@@ -104,7 +104,7 @@ function initialise() {
 };
 exports.initialise = initialise;
 },{"./ShopMenu":1}],5:[function(require,module,exports){
-$(function(){
+$(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
     console.log("in main");
@@ -121,6 +121,26 @@ $(function(){
             $(".buttonInMenu").fadeOut(200);
         }
     });
+    document.onmousemove = function (){
+        document.getElementsByTagName('html')[0].insertAdjacentHTML('beforeEnd', '<img src="images/cursor.svg" id="curs">');
+        var curs = document.getElementById('curs');
+        curs.style.zIndex = '10';
+        curs.style.position = 'fixed';
+        curs.style.pointerEvents = 'none';
+        document.onmousemove = function(event){
+            curs.style.left = event.clientX -9+'px';
+            curs.style.top = event.clientY -9+'px';
+        }
+    }
+    document.onmouseenter = function () {
+        var curs = document.getElementById('curs');
+        if(curs !== null)
+            curs.style.visibility = 'visible';
+    }
+    document.onmouseleave = function () {
+        var curs = document.getElementById('curs');
+        curs.style.visibility = 'hidden';
+    }
 });
 
 },{"./Shop/shop":4}],6:[function(require,module,exports){
@@ -1278,41 +1298,24 @@ exports.cache = {
 
 },{}],9:[function(require,module,exports){
 module.exports={
-  "_from": "ejs@^2.4.1",
-  "_id": "ejs@2.7.4",
-  "_inBundle": false,
-  "_integrity": "sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==",
-  "_location": "/ejs",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "range",
-    "registry": true,
-    "raw": "ejs@^2.4.1",
-    "name": "ejs",
-    "escapedName": "ejs",
-    "rawSpec": "^2.4.1",
-    "saveSpec": null,
-    "fetchSpec": "^2.4.1"
-  },
-  "_requiredBy": [
-    "/"
-  ],
-  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz",
-  "_shasum": "48661287573dcc53e366c7a1ae52c3a120eec9ba",
-  "_spec": "ejs@^2.4.1",
-  "_where": "D:\\Homework\\Programming_2\\Skovoroda\\Skovoroda",
-  "author": {
-    "name": "Matthew Eernisse",
-    "email": "mde@fleegix.org",
-    "url": "http://fleegix.org"
-  },
-  "bugs": {
-    "url": "https://github.com/mde/ejs/issues"
-  },
-  "bundleDependencies": false,
-  "dependencies": {},
-  "deprecated": false,
+  "name": "ejs",
   "description": "Embedded JavaScript templates",
+  "keywords": [
+    "template",
+    "engine",
+    "ejs"
+  ],
+  "version": "2.7.4",
+  "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
+  "license": "Apache-2.0",
+  "main": "./lib/ejs.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mde/ejs.git"
+  },
+  "bugs": "https://github.com/mde/ejs/issues",
+  "homepage": "https://github.com/mde/ejs",
+  "dependencies": {},
   "devDependencies": {
     "browserify": "^13.1.1",
     "eslint": "^4.14.0",
@@ -1326,24 +1329,10 @@ module.exports={
   "engines": {
     "node": ">=0.10.0"
   },
-  "homepage": "https://github.com/mde/ejs",
-  "keywords": [
-    "template",
-    "engine",
-    "ejs"
-  ],
-  "license": "Apache-2.0",
-  "main": "./lib/ejs.js",
-  "name": "ejs",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mde/ejs.git"
-  },
   "scripts": {
-    "postinstall": "node ./postinstall.js",
-    "test": "mocha"
-  },
-  "version": "2.7.4"
+    "test": "mocha",
+    "postinstall": "node ./postinstall.js"
+  }
 }
 
 },{}],10:[function(require,module,exports){
