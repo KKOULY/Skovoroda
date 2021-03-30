@@ -32,7 +32,7 @@
             <path d="M3 15h18v-2H3v2zm0 4h18v-2H3v2zm0-8h18V9H3v2zm0-6v2h18V5H3z"/>
         </svg>
     </div>
-    <h3 class="title m-0">Світ Сковороди</h3>
+    <h3 class="title m-0 d-none d-sm-block">Світ Сковороди</h3>
 </div>
 <section id="shop-container">
     <div type="button" class="btn btn-menu" id="shop-basket" data-toggle="modal" data-target="#staticBackdrop">
@@ -54,7 +54,7 @@
                         </button>
                     </div>
                 </div>
-                <div class="modal-body">
+                <div class="modal-body" id="cart">
                     <div class="row m-0 d-flex align-items-center">
                         <img src="images/shirt1.png" class="modal-image m-3" style="width: 64px;height: 64px">
                         <h4 class="modal-title font-weight-bold ml-2">Футболка</h4>
@@ -118,6 +118,9 @@
     </div>
     <ul class="nav justify-content-center">
         <li class="nav-item shop-filter">
+            <a class="nav-link active" id="All" href="#">Все</a>
+        </li>
+        <li class="nav-item shop-filter">
             <a class="nav-link active" id="shirt" href="#">Футболки</a>
         </li>
         <li class="nav-item shop-filter">
@@ -133,11 +136,11 @@
                 <img src="images/shirt1.png" class="card-img-top" alt="...">
                 <div class="card-body d-flex flex-column align-items-center">
                     <div class="card-title ">Футболка</div>
-                    <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                        <button type="button" class="btn btn-dark">S</button>
-                        <button type="button" class="btn btn-dark">M</button>
-                        <button type="button" class="btn btn-dark">L</button>
-                        <button type="button" class="btn btn-dark">XL</button>
+                    <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                        <button class="btn btn-dark"><input type="radio" name="options" id="option1">S</button>
+                        <button class="btn btn-dark"><input type="radio" name="options" id="option2">M</button>
+                        <button class="btn btn-dark"><input type="radio" name="options" id="option3">L</button>
+                        <button class="btn btn-dark"><input type="radio" name="options" id="option4">XL</button>
                     </div>
                     <div class="card-title ">20<span>$</span></div>
                     <button type="button" class="btn btn-danger">Купити</button>

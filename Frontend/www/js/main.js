@@ -1,6 +1,125 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 var Templates = require('./Templates');
-// var ShopCart = require('./ShopCart');
+var basil = require("basil.js");
+var Cart = [];
+var $cart = $("#cart");
+// var $totalPrice = $("#total");
+
+// $(".clear").click(function(){
+//     clearCart();
+//     //Оновлюємо відображення
+//     updateCart();
+// });
+//
+// function findCartElementIndex(pizza, size) {
+//     let i = undefined;
+//     Cart.forEach( (p,index) => {
+//         if(pizza.id === p.pizza.id && size === p.size){
+//             i = index;
+//         }
+//     })
+//     return i;
+// }
+
+function addToCart(item, size) {
+    //Приклад реалізації, можна робити будь-яким іншим способом
+    // let cartIndex = findCartElementIndex(pizza,size);
+    // if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
+    // else {
+    //     Cart.push({
+    //         pizza: pizza,
+    //         size: size,
+    //         quantity: 1
+    //     });
+    // }
+    Cart.push({
+        item: item,
+        size: size,
+        quantity: 1
+    })
+    //Оновити вміст кошика на сторінці
+    updateCart();
+    console.log(pizza);
+    console.log(size);
+}
+
+// function removeFromCart(cart_item) {
+//     //Видалити піцу з кошика
+//     let cartIndex = findCartElementIndex(cart_item.pizza,cart_item.size);
+//     console.log(cartIndex);
+//     if(cart_item !== 'undefined') Cart.splice(cartIndex,1);
+//     //Після видалення оновити відображення
+//     updateCart();
+// }
+//
+// function clearCart() {
+//     Cart = [];
+//     updateCart();
+// }
+//
+// function initialiseCart() {
+//     //Фукнція віпрацьвуватиме при завантаженні сторінки
+//     var saved_carts = basil.localStorage.get("cart");
+//     if(saved_carts) Cart = JSON.parse(saved_carts);
+//     console.log(Cart);
+//     updateCart();
+// }
+//
+// function getPizzaInCart() {
+//     //Повертає піци які зберігаються в кошику
+//     return Cart;
+// }
+//
+function updateCart() {
+    // basil.localStorage.set("cart",JSON.stringify(Cart));
+
+    $cart.html("");
+
+    let totalSum = 0;
+    //Онволення однієї піци
+    function showOneItemInCart(cart_item) {
+        var html_code = Templates.ShopCart_OneItem(cart_item);
+        // totalSum += cart_item.pizza[cart_item.size].price*cart_item.quantity;
+        var $node = $(html_code);
+
+        // $node.find(".plus").click(function(){
+        //     //Збільшуємо кількість замовлених піц
+        //     cart_item.quantity += 1;
+        //
+        //     //Оновлюємо відображення
+        //     updateCart();
+        // });
+        // $node.find(".minus").click(function(){
+        //     //Зменшуємо кількість замовлених піц
+        //     if(cart_item.quantity>1) {
+        //         cart_item.quantity -= 1;
+        //         //Оновлюємо відображення
+        //         updateCart();
+        //     }
+        // });
+        // $node.find(".close").click(function(){
+        //     console.log("close button clicked")
+        //     removeFromCart(cart_item);
+        // });
+
+        $cart.append($node);
+    }
+    Cart.forEach(showOneItemInCart);
+    // $totalPrice.text(totalSum.toString()+"₴");
+    // $(".order-count").text(Cart.length.toString());
+
+}
+
+// exports.removeFromCart = removeFromCart;
+exports.addToCart = addToCart;
+
+// exports.getPizzaInCart = getPizzaInCart;
+// exports.initialiseCart = initialiseCart;
+//
+// exports.PizzaSize = PizzaSize;
+},{"./Templates":4,"basil.js":7}],2:[function(require,module,exports){
+var Templates = require('./Templates');
+var ShopCart = require('./ShopCart');
 var ShopList = require('./Shop_Items_List');
 
 //HTML едемент куди будуть додаватися піци
@@ -16,12 +135,10 @@ function showPizzaList(list) {
 
         var $node = $(html_code);
 
-        // $node.find(".buy-big").click(function(){
-        //     PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
-        // });
-        // $node.find(".buy-small").click(function(){
-        //     PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
-        // });
+        $node.find(".btn-buy").click(function(){
+            let $size = $node.find(".active");
+            if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+        });
 
         $shop_list.append($node);
     }
@@ -43,13 +160,12 @@ function showPizzaList(list) {
 // }
 
 function initialiseMenu() {
-    console.log("in menu");
     showPizzaList(ShopList);
 }
 
 // exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
-},{"./Shop_Items_List":2,"./Templates":3}],2:[function(require,module,exports){
+},{"./ShopCart":1,"./Shop_Items_List":3,"./Templates":4}],3:[function(require,module,exports){
 var shop_info = [
     {
         id:1,
@@ -86,28 +202,26 @@ var shop_info = [
 ];
 
 module.exports = shop_info;
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 
 var ejs = require('ejs');
 
 
-exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <div class=\"btn-group btn-group-sm\" role=\"group\" aria-label=\"Basic example\">\r\n                <button type=\"button\" class=\"btn btn-dark\">S</button>\r\n                <button type=\"button\" class=\"btn btn-dark\">M</button>\r\n                <button type=\"button\" class=\"btn btn-dark\">L</button>\r\n                <button type=\"button\" class=\"btn btn-dark\">XL</button>\r\n            </div>\r\n            <div class=\"card-title\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
+exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n            </div>\r\n            <div class=\"card-title\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
 
-// exports.Cart_OneItem = ejs.compile(fs.readFileSync('./Frontend/templates/ShopCart_OneItem.ejs', "utf8"));
-},{"ejs":7}],4:[function(require,module,exports){
+exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title font-weight-bold ml-2\" style=\"max-width: 150px\"><%= item.title%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn\">+</div>\r\n        </div>\r\n        <input type=\"input\" class=\"text-center\" value=\"1\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn\">-</div>\r\n        </div>\r\n    </div>\r\n    <div class=\"btn-container d-flex justify-content-center align-items-center ml-auto mr-3\">\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n</div>");
+},{"ejs":9}],5:[function(require,module,exports){
 function initialise() {
     var Menu = require('./ShopMenu');
     // var Cart = require('./ShopCart');
-    console.log("in shop");
     // Cart.initialiseCart();
     Menu.initialiseMenu();
 };
 exports.initialise = initialise;
-},{"./ShopMenu":1}],5:[function(require,module,exports){
+},{"./ShopMenu":2}],6:[function(require,module,exports){
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
-    console.log("in main");
     $("#openMenuButton").click(function () {
         if ($("#menu").hasClass("menuHidden")) {
             $("body").addClass("modal-open");
@@ -143,9 +257,414 @@ $(function () {
     }
 });
 
-},{"./Shop/shop":4}],6:[function(require,module,exports){
+},{"./Shop/shop":5}],7:[function(require,module,exports){
+(function () {
+	// Basil
+	var Basil = function (options) {
+		return Basil.utils.extend({}, Basil.plugins, new Basil.Storage().init(options));
+	};
 
-},{}],7:[function(require,module,exports){
+	// Version
+	Basil.version = '0.4.11';
+
+	// Utils
+	Basil.utils = {
+		extend: function () {
+			var destination = typeof arguments[0] === 'object' ? arguments[0] : {};
+			for (var i = 1; i < arguments.length; i++) {
+				if (arguments[i] && typeof arguments[i] === 'object')
+					for (var property in arguments[i])
+						destination[property] = arguments[i][property];
+			}
+			return destination;
+		},
+		each: function (obj, fnIterator, context) {
+			if (this.isArray(obj)) {
+				for (var i = 0; i < obj.length; i++)
+					if (fnIterator.call(context, obj[i], i) === false) return;
+			} else if (obj) {
+				for (var key in obj)
+					if (fnIterator.call(context, obj[key], key) === false) return;
+			}
+		},
+		tryEach: function (obj, fnIterator, fnError, context) {
+			this.each(obj, function (value, key) {
+				try {
+					return fnIterator.call(context, value, key);
+				} catch (error) {
+					if (this.isFunction(fnError)) {
+						try {
+							fnError.call(context, value, key, error);
+						} catch (error) {}
+					}
+				}
+			}, this);
+		},
+		registerPlugin: function (methods) {
+			Basil.plugins = this.extend(methods, Basil.plugins);
+		},
+		getTypeOf: function (obj) {
+			if (typeof obj === 'undefined' || obj === null)
+				return '' + obj;
+			return Object.prototype.toString.call(obj).replace(/^\[object\s(.*)\]$/, function ($0, $1) { return $1.toLowerCase(); });
+		}
+	};
+
+	// Add some isType methods: isArguments, isBoolean, isFunction, isString, isArray, isNumber, isDate, isRegExp, isUndefined, isNull.
+	var types = ['Arguments', 'Boolean', 'Function', 'String', 'Array', 'Number', 'Date', 'RegExp', 'Undefined', 'Null'];
+	for (var i = 0; i < types.length; i++) {
+		Basil.utils['is' + types[i]] = (function (type) {
+			return function (obj) {
+				return Basil.utils.getTypeOf(obj) === type.toLowerCase();
+			};
+		})(types[i]);
+	}
+
+	// Plugins
+	Basil.plugins = {};
+
+	// Options
+	Basil.options = Basil.utils.extend({
+		namespace: 'b45i1',
+		storages: ['local', 'cookie', 'session', 'memory'],
+		expireDays: 365,
+		keyDelimiter: '.'
+	}, window.Basil ? window.Basil.options : {});
+
+	// Storage
+	Basil.Storage = function () {
+		var _salt = 'b45i1' + (Math.random() + 1)
+				.toString(36)
+				.substring(7),
+			_storages = {},
+			_isValidKey = function (key) {
+				var type = Basil.utils.getTypeOf(key);
+				return (type === 'string' && key) || type === 'number' || type === 'boolean';
+			},
+			_toStoragesArray = function (storages) {
+				if (Basil.utils.isArray(storages))
+					return storages;
+				return Basil.utils.isString(storages) ? [storages] : [];
+			},
+			_toStoredKey = function (namespace, path, delimiter) {
+				var key = '';
+				if (_isValidKey(path)) {
+					key += path;
+				} else if (Basil.utils.isArray(path)) {
+					path = Basil.utils.isFunction(path.filter) ? path.filter(_isValidKey) : path;
+					key = path.join(delimiter);
+				}
+				return key && _isValidKey(namespace) ? namespace + delimiter + key : key;
+ 			},
+			_toKeyName = function (namespace, key, delimiter) {
+				if (!_isValidKey(namespace))
+					return key;
+				return key.replace(new RegExp('^' + namespace + delimiter), '');
+			},
+			_toStoredValue = function (value) {
+				return JSON.stringify(value);
+			},
+			_fromStoredValue = function (value) {
+				return value ? JSON.parse(value) : null;
+			};
+
+		// HTML5 web storage interface
+		var webStorageInterface = {
+			engine: null,
+			check: function () {
+				try {
+					window[this.engine].setItem(_salt, true);
+					window[this.engine].removeItem(_salt);
+				} catch (e) {
+					return false;
+				}
+				return true;
+			},
+			set: function (key, value, options) {
+				if (!key)
+					throw Error('invalid key');
+				window[this.engine].setItem(key, value);
+			},
+			get: function (key) {
+				return window[this.engine].getItem(key);
+			},
+			remove: function (key) {
+				window[this.engine].removeItem(key);
+			},
+			reset: function (namespace) {
+				for (var i = 0, key; i < window[this.engine].length; i++) {
+					key = window[this.engine].key(i);
+					if (!namespace || key.indexOf(namespace) === 0) {
+						this.remove(key);
+						i--;
+					}
+				}
+			},
+			keys: function (namespace, delimiter) {
+				var keys = [];
+				for (var i = 0, key; i < window[this.engine].length; i++) {
+					key = window[this.engine].key(i);
+					if (!namespace || key.indexOf(namespace) === 0)
+						keys.push(_toKeyName(namespace, key, delimiter));
+				}
+				return keys;
+			}
+		};
+
+		// local storage
+		_storages.local = Basil.utils.extend({}, webStorageInterface, {
+			engine: 'localStorage'
+		});
+		// session storage
+		_storages.session = Basil.utils.extend({}, webStorageInterface, {
+			engine: 'sessionStorage'
+		});
+
+		// memory storage
+		_storages.memory = {
+			_hash: {},
+			check: function () {
+				return true;
+			},
+			set: function (key, value, options) {
+				if (!key)
+					throw Error('invalid key');
+				this._hash[key] = value;
+			},
+			get: function (key) {
+				return this._hash[key] || null;
+			},
+			remove: function (key) {
+				delete this._hash[key];
+			},
+			reset: function (namespace) {
+				for (var key in this._hash) {
+					if (!namespace || key.indexOf(namespace) === 0)
+						this.remove(key);
+				}
+			},
+			keys: function (namespace, delimiter) {
+				var keys = [];
+				for (var key in this._hash)
+					if (!namespace || key.indexOf(namespace) === 0)
+						keys.push(_toKeyName(namespace, key, delimiter));
+				return keys;
+			}
+		};
+
+		// cookie storage
+		_storages.cookie = {
+			check: function (options) {
+				if (!navigator.cookieEnabled)
+					return false;
+				if (window.self !== window.top) {
+					// we need to check third-party cookies;
+					var cookie = 'thirdparty.check=' + Math.round(Math.random() * 1000);
+					document.cookie = cookie + '; path=/';
+					return document.cookie.indexOf(cookie) !== -1;
+				}
+				// if cookie secure activated, ensure it works (not the case if we are in http only)
+				if (options && options.secure) {
+					try {
+						this.set(_salt, _salt, options);
+						var hasSecurelyPersited = this.get(_salt) === _salt;
+						this.remove(_salt);
+						return hasSecurelyPersited;
+					} catch (error) {
+						return false;
+					}
+				}
+				return true;
+			},
+			set: function (key, value, options) {
+				if (!this.check())
+					throw Error('cookies are disabled');
+				options = options || {};
+				if (!key)
+					throw Error('invalid key');
+				var cookie = encodeURIComponent(key) + '=' + encodeURIComponent(value);
+				// handle expiration days
+				if (options.expireDays) {
+					var date = new Date();
+					date.setTime(date.getTime() + (options.expireDays * 24 * 60 * 60 * 1000));
+					cookie += '; expires=' + date.toGMTString();
+				}
+				// handle domain
+				if (options.domain && options.domain !== document.domain) {
+					var _domain = options.domain.replace(/^\./, '');
+					if (document.domain.indexOf(_domain) === -1 || _domain.split('.').length <= 1)
+						throw Error('invalid domain');
+					cookie += '; domain=' + options.domain;
+				}
+				// handle same site
+				if (options.sameSite && ['lax','strict','none'].includes(options.sameSite.toLowerCase())) {
+					cookie += '; SameSite=' + options.sameSite;
+				}
+				// handle secure
+				if (options.secure === true) {
+					cookie += '; Secure';
+				}
+				document.cookie = cookie + '; path=/';
+			},
+			get: function (key) {
+				if (!this.check())
+					throw Error('cookies are disabled');
+				var encodedKey = encodeURIComponent(key);
+				var cookies = document.cookie ? document.cookie.split(';') : [];
+				// retrieve last updated cookie first
+				for (var i = cookies.length - 1, cookie; i >= 0; i--) {
+					cookie = cookies[i].replace(/^\s*/, '');
+					if (cookie.indexOf(encodedKey + '=') === 0)
+						return decodeURIComponent(cookie.substring(encodedKey.length + 1, cookie.length));
+				}
+				return null;
+			},
+			remove: function (key) {
+				// remove cookie from main domain
+				this.set(key, '', { expireDays: -1 });
+				// remove cookie from upper domains
+				var domainParts = document.domain.split('.');
+				for (var i = domainParts.length; i > 1; i--) {
+					this.set(key, '', { expireDays: -1, domain: '.' + domainParts.slice(- i).join('.') });
+				}
+			},
+			reset: function (namespace) {
+				var cookies = document.cookie ? document.cookie.split(';') : [];
+				for (var i = 0, cookie, key; i < cookies.length; i++) {
+					cookie = cookies[i].replace(/^\s*/, '');
+					key = cookie.substr(0, cookie.indexOf('='));
+					if (!namespace || key.indexOf(namespace) === 0)
+						this.remove(key);
+				}
+			},
+			keys: function (namespace, delimiter) {
+				if (!this.check())
+					throw Error('cookies are disabled');
+				var keys = [],
+					cookies = document.cookie ? document.cookie.split(';') : [];
+				for (var i = 0, cookie, key; i < cookies.length; i++) {
+					cookie = cookies[i].replace(/^\s*/, '');
+					key = decodeURIComponent(cookie.substr(0, cookie.indexOf('=')));
+					if (!namespace || key.indexOf(namespace) === 0)
+						keys.push(_toKeyName(namespace, key, delimiter));
+				}
+				return keys;
+			}
+		};
+
+		return {
+			init: function (options) {
+				this.setOptions(options);
+				return this;
+			},
+			setOptions: function (options) {
+				this.options = Basil.utils.extend({}, this.options || Basil.options, options);
+			},
+			support: function (storage) {
+				return _storages.hasOwnProperty(storage);
+			},
+			check: function (storage) {
+				if (this.support(storage))
+					return _storages[storage].check(this.options);
+				return false;
+			},
+			set: function (key, value, options) {
+				options = Basil.utils.extend({}, this.options, options);
+				if (!(key = _toStoredKey(options.namespace, key, options.keyDelimiter)))
+					return false;
+				value = options.raw === true ? value : _toStoredValue(value);
+				var where = null;
+				// try to set key/value in first available storage
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage, index) {
+					_storages[storage].set(key, value, options);
+					where = storage;
+					return false; // break;
+				}, null, this);
+				if (!where) {
+					// key has not been set anywhere
+					return false;
+				}
+				// remove key from all other storages
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage, index) {
+					if (storage !== where)
+						_storages[storage].remove(key);
+				}, null, this);
+				return true;
+			},
+			get: function (key, options) {
+				options = Basil.utils.extend({}, this.options, options);
+				if (!(key = _toStoredKey(options.namespace, key, options.keyDelimiter)))
+					return null;
+				var value = null;
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage, index) {
+					if (value !== null)
+						return false; // break if a value has already been found.
+					value = _storages[storage].get(key, options) || null;
+					value = options.raw === true ? value : _fromStoredValue(value);
+				}, function (storage, index, error) {
+					value = null;
+				}, this);
+				return value;
+			},
+			remove: function (key, options) {
+				options = Basil.utils.extend({}, this.options, options);
+				if (!(key = _toStoredKey(options.namespace, key, options.keyDelimiter)))
+					return;
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage) {
+					_storages[storage].remove(key);
+				}, null, this);
+			},
+			reset: function (options) {
+				options = Basil.utils.extend({}, this.options, options);
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage) {
+					_storages[storage].reset(options.namespace);
+				}, null, this);
+			},
+			keys: function (options) {
+				options = options || {};
+				var keys = [];
+				for (var key in this.keysMap(options))
+					keys.push(key);
+				return keys;
+			},
+			keysMap: function (options) {
+				options = Basil.utils.extend({}, this.options, options);
+				var map = {};
+				Basil.utils.tryEach(_toStoragesArray(options.storages), function (storage) {
+					Basil.utils.each(_storages[storage].keys(options.namespace, options.keyDelimiter), function (key) {
+						map[key] = Basil.utils.isArray(map[key]) ? map[key] : [];
+						map[key].push(storage);
+					}, this);
+				}, null, this);
+				return map;
+			}
+		};
+	};
+
+	// Access to native storages, without namespace or basil value decoration
+	Basil.memory = new Basil.Storage().init({ storages: 'memory', namespace: null, raw: true });
+	Basil.cookie = new Basil.Storage().init({ storages: 'cookie', namespace: null, raw: true });
+	Basil.localStorage = new Basil.Storage().init({ storages: 'local', namespace: null, raw: true });
+	Basil.sessionStorage = new Basil.Storage().init({ storages: 'session', namespace: null, raw: true });
+
+	// browser export
+	window.Basil = Basil;
+
+	// AMD export
+	if (typeof define === 'function' && define.amd) {
+		define(function() {
+			return Basil;
+		});
+	// commonjs export
+	} else if (typeof module !== 'undefined' && module.exports) {
+		module.exports = Basil;
+	}
+
+})();
+
+},{}],8:[function(require,module,exports){
+
+},{}],9:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1127,7 +1646,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":9,"./utils":8,"fs":6,"path":10}],8:[function(require,module,exports){
+},{"../package.json":11,"./utils":10,"fs":8,"path":12}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1296,26 +1815,43 @@ exports.cache = {
   }
 };
 
-},{}],9:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports={
-  "name": "ejs",
-  "description": "Embedded JavaScript templates",
-  "keywords": [
-    "template",
-    "engine",
-    "ejs"
-  ],
-  "version": "2.7.4",
-  "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
-  "license": "Apache-2.0",
-  "main": "./lib/ejs.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mde/ejs.git"
+  "_from": "ejs@^2.4.1",
+  "_id": "ejs@2.7.4",
+  "_inBundle": false,
+  "_integrity": "sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==",
+  "_location": "/ejs",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "ejs@^2.4.1",
+    "name": "ejs",
+    "escapedName": "ejs",
+    "rawSpec": "^2.4.1",
+    "saveSpec": null,
+    "fetchSpec": "^2.4.1"
   },
-  "bugs": "https://github.com/mde/ejs/issues",
-  "homepage": "https://github.com/mde/ejs",
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz",
+  "_shasum": "48661287573dcc53e366c7a1ae52c3a120eec9ba",
+  "_spec": "ejs@^2.4.1",
+  "_where": "D:\\Homework\\Programming_2\\Skovoroda\\Skovoroda",
+  "author": {
+    "name": "Matthew Eernisse",
+    "email": "mde@fleegix.org",
+    "url": "http://fleegix.org"
+  },
+  "bugs": {
+    "url": "https://github.com/mde/ejs/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {},
+  "deprecated": false,
+  "description": "Embedded JavaScript templates",
   "devDependencies": {
     "browserify": "^13.1.1",
     "eslint": "^4.14.0",
@@ -1329,13 +1865,27 @@ module.exports={
   "engines": {
     "node": ">=0.10.0"
   },
+  "homepage": "https://github.com/mde/ejs",
+  "keywords": [
+    "template",
+    "engine",
+    "ejs"
+  ],
+  "license": "Apache-2.0",
+  "main": "./lib/ejs.js",
+  "name": "ejs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mde/ejs.git"
+  },
   "scripts": {
-    "test": "mocha",
-    "postinstall": "node ./postinstall.js"
-  }
+    "postinstall": "node ./postinstall.js",
+    "test": "mocha"
+  },
+  "version": "2.7.4"
 }
 
-},{}],10:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -1641,7 +2191,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":11}],11:[function(require,module,exports){
+},{"_process":13}],13:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -1827,4 +2377,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[5]);
+},{}]},{},[6]);

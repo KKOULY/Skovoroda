@@ -1,5 +1,5 @@
 var Templates = require('./Templates');
-// var ShopCart = require('./ShopCart');
+var ShopCart = require('./ShopCart');
 var ShopList = require('./Shop_Items_List');
 
 //HTML едемент куди будуть додаватися піци
@@ -15,12 +15,10 @@ function showPizzaList(list) {
 
         var $node = $(html_code);
 
-        // $node.find(".buy-big").click(function(){
-        //     PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Big);
-        // });
-        // $node.find(".buy-small").click(function(){
-        //     PizzaCart.addToCart(pizza, PizzaCart.PizzaSize.Small);
-        // });
+        $node.find(".btn-buy").click(function(){
+            let $size = $node.find(".active");
+            if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+        });
 
         $shop_list.append($node);
     }
@@ -42,7 +40,6 @@ function showPizzaList(list) {
 // }
 
 function initialiseMenu() {
-    console.log("in menu");
     showPizzaList(ShopList);
 }
 

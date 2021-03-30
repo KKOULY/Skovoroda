@@ -1,7 +1,6 @@
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
-    console.log("in main");
     $("#openMenuButton").click(function () {
         if ($("#menu").hasClass("menuHidden")) {
             $("body").addClass("modal-open");
