@@ -22,6 +22,20 @@ function findCartElementIndex(item, size) {
 
 function addToCart(item, size) {
     //Приклад реалізації, можна робити будь-яким іншим способом
+    $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
+        start: function() {
+            $(this).css('transform','scale(1.2)');
+        },
+        done: function() {
+            $(this).css('transform','scale(1)');
+        },
+    });
+    // $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
+    //     step: function() {
+    //         $(this).css('transform','scale(1)');
+    //     },
+    //     duration: 'slow'
+    // }, 'linear');
     let cartIndex = findCartElementIndex(item,size);
     if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
     else {

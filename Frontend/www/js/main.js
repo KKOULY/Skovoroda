@@ -23,6 +23,20 @@ function findCartElementIndex(item, size) {
 
 function addToCart(item, size) {
     //Приклад реалізації, можна робити будь-яким іншим способом
+    $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
+        start: function() {
+            $(this).css('transform','scale(1.2)');
+        },
+        done: function() {
+            $(this).css('transform','scale(1)');
+        },
+    });
+    // $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
+    //     step: function() {
+    //         $(this).css('transform','scale(1)');
+    //     },
+    //     duration: 'slow'
+    // }, 'linear');
     let cartIndex = findCartElementIndex(item,size);
     if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
     else {
@@ -231,7 +245,7 @@ module.exports = shop_info;
 var ejs = require('ejs');
 
 
-exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <%if(item.type === \"Футболка\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n                </div>\r\n            <%}%>\r\n            <%if(item.type === \"Шкарпетки\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle d-flex flex-row\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">38-42</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">43-46</button>\r\n                </div>\r\n            <%}%>\r\n            <div class=\"card-title\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
+exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <%if(item.type === \"Футболка\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n                </div>\r\n            <%}%>\r\n            <%if(item.type === \"Шкарпетки\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle d-flex flex-row\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">38-42</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">43-46</button>\r\n                </div>\r\n            <%}%>\r\n            <div class=\"card-title mt-auto\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
 
 exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title font-weight-bold ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn plus\">+</div>\r\n        </div>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn minus\">-</div>\r\n        </div>\r\n    </div>\r\n    <div class=\"btn-container d-flex justify-content-center align-items-center ml-auto mr-3\">\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n</div>");
 },{"ejs":9}],5:[function(require,module,exports){
