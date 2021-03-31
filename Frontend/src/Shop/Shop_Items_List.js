@@ -31,6 +31,38 @@ var shop_info = [
         type: 'Футболка',
         price: 19,
     },
+    {
+        id:5,
+        icon:'images/cup1.png',
+        title: "Чашка Сковорода",
+        color: "біла",
+        type: 'Чашка',
+        price: 10,
+    },
+    {
+        id:6,
+        icon:'images/cup2.png',
+        title: "Чашка Сковорода",
+        color: "чорна",
+        type: 'Чашка',
+        price: 9,
+    },
+    {
+        id:7,
+        icon:'images/socks1.png',
+        title: "Шкарпетки Сковорода",
+        color: "білі",
+        type: 'Шкарпетки',
+        price: 5,
+    },
+    {
+        id:8,
+        icon:'images/socks2.png',
+        title: "Шкарпетки Сковорода",
+        color: "чорні",
+        type: 'Шкарпетки',
+        price: 4,
+    },
 ];
 
 module.exports = shop_info;

@@ -1,13 +1,13 @@
 <div class="row m-0 d-flex align-items-center">
     <img src="<%= item.icon%>" class="modal-image m-3" style="width: 64px;height: 64px">
-    <h4 class="modal-title font-weight-bold ml-2" style="max-width: 150px"><%= item.title%></h4>
+    <h4 class="modal-title font-weight-bold ml-2" style="max-width: 150px"><%= item.title%><%if(size !== "none"){%>(<%=size%>)<%}%></h4>
     <div class="btn-group btn-group-sm d-flex align-items-center ml-auto" role="group">
         <div class="btn-container d-flex justify-content-center align-items-center">
-            <div type="button" class="btn">+</div>
+            <div type="button" class="btn plus">+</div>
         </div>
-        <input type="input" class="text-center" value="1">
+        <input type="text" class="text-center" value="<%= quantity%>">
         <div class="btn-container d-flex justify-content-center align-items-center">
-            <div type="button" class="btn">-</div>
+            <div type="button" class="btn minus">-</div>
         </div>
     </div>
     <div class="btn-container d-flex justify-content-center align-items-center ml-auto mr-3">

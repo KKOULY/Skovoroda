@@ -3,7 +3,7 @@ var Templates = require('./Templates');
 var basil = require("basil.js");
 var Cart = [];
 var $cart = $("#cart");
-// var $totalPrice = $("#total");
+var $totalPrice = $(".total");
 
 // $(".clear").click(function(){
 //     clearCart();
@@ -11,67 +11,58 @@ var $cart = $("#cart");
 //     updateCart();
 // });
 //
-// function findCartElementIndex(pizza, size) {
-//     let i = undefined;
-//     Cart.forEach( (p,index) => {
-//         if(pizza.id === p.pizza.id && size === p.size){
-//             i = index;
-//         }
-//     })
-//     return i;
-// }
+function findCartElementIndex(item, size) {
+    let idx = undefined;
+    Cart.forEach( (i,index) => {
+        if(item.id === i.item.id && size === i.size){
+            idx = index;
+        }
+    })
+    return idx;
+}
 
 function addToCart(item, size) {
     //Приклад реалізації, можна робити будь-яким іншим способом
-    // let cartIndex = findCartElementIndex(pizza,size);
-    // if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
-    // else {
-    //     Cart.push({
-    //         pizza: pizza,
-    //         size: size,
-    //         quantity: 1
-    //     });
-    // }
-    Cart.push({
-        item: item,
-        size: size,
-        quantity: 1
-    })
+    let cartIndex = findCartElementIndex(item,size);
+    if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
+    else {
+        Cart.push({
+            item: item,
+            size: size,
+            quantity: 1
+        })
+    }
     //Оновити вміст кошика на сторінці
     updateCart();
-    console.log(pizza);
-    console.log(size);
 }
 
-// function removeFromCart(cart_item) {
-//     //Видалити піцу з кошика
-//     let cartIndex = findCartElementIndex(cart_item.pizza,cart_item.size);
-//     console.log(cartIndex);
-//     if(cart_item !== 'undefined') Cart.splice(cartIndex,1);
-//     //Після видалення оновити відображення
-//     updateCart();
-// }
+function removeFromCart(cart_item) {
+    //Видалити піцу з кошика
+    let cartIndex = findCartElementIndex(cart_item.item,cart_item.size);
+    if(cart_item !== 'undefined') Cart.splice(cartIndex,1);
+    //Після видалення оновити відображення
+    updateCart();
+}
 //
 // function clearCart() {
 //     Cart = [];
 //     updateCart();
 // }
 //
-// function initialiseCart() {
-//     //Фукнція віпрацьвуватиме при завантаженні сторінки
-//     var saved_carts = basil.localStorage.get("cart");
-//     if(saved_carts) Cart = JSON.parse(saved_carts);
-//     console.log(Cart);
-//     updateCart();
-// }
-//
-// function getPizzaInCart() {
-//     //Повертає піци які зберігаються в кошику
-//     return Cart;
-// }
-//
+function initialiseCart() {
+    //Фукнція віпрацьвуватиме при завантаженні сторінки
+    var saved_carts = basil.localStorage.get("cart");
+    if(saved_carts) Cart = JSON.parse(saved_carts);
+    updateCart();
+}
+
+function getItemsInCart() {
+    //Повертає піци які зберігаються в кошику
+    return Cart;
+}
+
 function updateCart() {
-    // basil.localStorage.set("cart",JSON.stringify(Cart));
+    basil.localStorage.set("cart",JSON.stringify(Cart));
 
     $cart.html("");
 
@@ -79,44 +70,41 @@ function updateCart() {
     //Онволення однієї піци
     function showOneItemInCart(cart_item) {
         var html_code = Templates.ShopCart_OneItem(cart_item);
-        // totalSum += cart_item.pizza[cart_item.size].price*cart_item.quantity;
+        totalSum += cart_item.item.price*cart_item.quantity;
         var $node = $(html_code);
 
-        // $node.find(".plus").click(function(){
-        //     //Збільшуємо кількість замовлених піц
-        //     cart_item.quantity += 1;
-        //
-        //     //Оновлюємо відображення
-        //     updateCart();
-        // });
-        // $node.find(".minus").click(function(){
-        //     //Зменшуємо кількість замовлених піц
-        //     if(cart_item.quantity>1) {
-        //         cart_item.quantity -= 1;
-        //         //Оновлюємо відображення
-        //         updateCart();
-        //     }
-        // });
-        // $node.find(".close").click(function(){
-        //     console.log("close button clicked")
-        //     removeFromCart(cart_item);
-        // });
+        $node.find(".plus").click(function(){
+            //Збільшуємо кількість замовлених піц
+            cart_item.quantity += 1;
+
+            //Оновлюємо відображення
+            updateCart();
+        });
+        $node.find(".minus").click(function(){
+            //Зменшуємо кількість замовлених піц
+            if(cart_item.quantity>1) {
+                cart_item.quantity -= 1;
+                //Оновлюємо відображення
+                updateCart();
+            }
+        });
+        $node.find(".close").click(function(){
+            removeFromCart(cart_item);
+        });
 
         $cart.append($node);
     }
     Cart.forEach(showOneItemInCart);
-    // $totalPrice.text(totalSum.toString()+"₴");
-    // $(".order-count").text(Cart.length.toString());
+    $totalPrice.text(" "+totalSum.toString()+"$");
+    $(".order-count").text(Cart.length.toString());
 
 }
 
-// exports.removeFromCart = removeFromCart;
+exports.removeFromCart = removeFromCart;
 exports.addToCart = addToCart;
 
-// exports.getPizzaInCart = getPizzaInCart;
-// exports.initialiseCart = initialiseCart;
-//
-// exports.PizzaSize = PizzaSize;
+exports.getItemsInCart = getItemsInCart;
+exports.initialiseCart = initialiseCart;
 },{"./Templates":4,"basil.js":7}],2:[function(require,module,exports){
 var Templates = require('./Templates');
 var ShopCart = require('./ShopCart');
@@ -136,15 +124,19 @@ function showPizzaList(list) {
         var $node = $(html_code);
 
         $node.find(".btn-buy").click(function(){
-            let $size = $node.find(".active");
-            if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+            if(item.type === "Чашка"){
+                ShopCart.addToCart(item, "none");
+            }else {
+                let $size = $node.find(".active");
+                if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+            }
         });
 
         $shop_list.append($node);
     }
 
     list.forEach(showOneItem);
-    // $(".pizza-count").text(list.length.toString());
+    //$(".pizza-count").text(list.length.toString());
 }
 
 // function filterPizza(filter) {
@@ -199,6 +191,38 @@ var shop_info = [
         type: 'Футболка',
         price: 19,
     },
+    {
+        id:5,
+        icon:'images/cup1.png',
+        title: "Чашка Сковорода",
+        color: "біла",
+        type: 'Чашка',
+        price: 10,
+    },
+    {
+        id:6,
+        icon:'images/cup2.png',
+        title: "Чашка Сковорода",
+        color: "чорна",
+        type: 'Чашка',
+        price: 9,
+    },
+    {
+        id:7,
+        icon:'images/socks1.png',
+        title: "Шкарпетки Сковорода",
+        color: "білі",
+        type: 'Шкарпетки',
+        price: 5,
+    },
+    {
+        id:8,
+        icon:'images/socks2.png',
+        title: "Шкарпетки Сковорода",
+        color: "чорні",
+        type: 'Шкарпетки',
+        price: 4,
+    },
 ];
 
 module.exports = shop_info;
@@ -207,18 +231,18 @@ module.exports = shop_info;
 var ejs = require('ejs');
 
 
-exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n            </div>\r\n            <div class=\"card-title\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
+exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <%if(item.type === \"Футболка\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n                </div>\r\n            <%}%>\r\n            <%if(item.type === \"Шкарпетки\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle d-flex flex-row\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">38-42</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">43-46</button>\r\n                </div>\r\n            <%}%>\r\n            <div class=\"card-title\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
 
-exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title font-weight-bold ml-2\" style=\"max-width: 150px\"><%= item.title%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn\">+</div>\r\n        </div>\r\n        <input type=\"input\" class=\"text-center\" value=\"1\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn\">-</div>\r\n        </div>\r\n    </div>\r\n    <div class=\"btn-container d-flex justify-content-center align-items-center ml-auto mr-3\">\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n</div>");
+exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title font-weight-bold ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn plus\">+</div>\r\n        </div>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn minus\">-</div>\r\n        </div>\r\n    </div>\r\n    <div class=\"btn-container d-flex justify-content-center align-items-center ml-auto mr-3\">\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n</div>");
 },{"ejs":9}],5:[function(require,module,exports){
 function initialise() {
     var Menu = require('./ShopMenu');
-    // var Cart = require('./ShopCart');
-    // Cart.initialiseCart();
+    var Cart = require('./ShopCart');
+    Cart.initialiseCart();
     Menu.initialiseMenu();
 };
 exports.initialise = initialise;
-},{"./ShopMenu":2}],6:[function(require,module,exports){
+},{"./ShopCart":1,"./ShopMenu":2}],6:[function(require,module,exports){
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();

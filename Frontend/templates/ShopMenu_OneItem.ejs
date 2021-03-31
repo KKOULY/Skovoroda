@@ -3,12 +3,20 @@
         <img src="<%= item.icon%>" class="card-img-top p-3" alt="...">
         <div class="card-body d-flex flex-column align-items-center">
             <div class="card-title text-center"><%= item.title%></div>
-            <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
-                <button class="btn btn-dark"><input type="radio" name="options" id="option1">S</button>
-                <button class="btn btn-dark"><input type="radio" name="options" id="option2">M</button>
-                <button class="btn btn-dark"><input type="radio" name="options" id="option3">L</button>
-                <button class="btn btn-dark"><input type="radio" name="options" id="option4">XL</button>
-            </div>
+            <%if(item.type === "Футболка"){%>
+                <div class="btn-group btn-group-sm btn-group-toggle" data-toggle="buttons">
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option1">S</button>
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option2">M</button>
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option3">L</button>
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option4">XL</button>
+                </div>
+            <%}%>
+            <%if(item.type === "Шкарпетки"){%>
+                <div class="btn-group btn-group-sm btn-group-toggle d-flex flex-row" data-toggle="buttons">
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option1">38-42</button>
+                    <button class="btn btn-dark"><input type="radio" name="options" id="option2">43-46</button>
+                </div>
+            <%}%>
             <div class="card-title"><%= item.price%><span>$</span></div>
             <button type="button" class="btn btn-danger btn-buy">Купити</button>
         </div>

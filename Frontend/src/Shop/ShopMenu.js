@@ -16,15 +16,19 @@ function showPizzaList(list) {
         var $node = $(html_code);
 
         $node.find(".btn-buy").click(function(){
-            let $size = $node.find(".active");
-            if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+            if(item.type === "Чашка"){
+                ShopCart.addToCart(item, "none");
+            }else {
+                let $size = $node.find(".active");
+                if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+            }
         });
 
         $shop_list.append($node);
     }
 
     list.forEach(showOneItem);
-    // $(".pizza-count").text(list.length.toString());
+    //$(".pizza-count").text(list.length.toString());
 }
 
 // function filterPizza(filter) {
