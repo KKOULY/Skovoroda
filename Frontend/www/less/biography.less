@@ -1,0 +1,36 @@
+.paragraphs{
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: @background-color;
+  color: @foreground-color;
+  min-width: 37px;
+  transition: all 1s ease;
+  .paragraph{
+    color: @foreground-color;
+    text-align: left;
+    transition: all 1s ease;
+    .paragraphName{
+      display: none;
+    }
+  }
+  .paragraph:focus{
+    text-decoration: none;
+  }
+  .paragraph:hover{
+    text-decoration: none;
+    font-size: x-large;
+    .paragraphName{
+      display: inline-block;
+    }
+  }
+}
+.paragraphs:hover{
+  min-width: 550px;
+}
+#biography{
+  color: @foreground-color;
+  padding-left: 60px;
+  padding-right: 50px;
+  text-align: justify;
+}
