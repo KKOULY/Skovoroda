@@ -1,18 +1,25 @@
 <div class="row m-0 d-flex align-items-center">
     <img src="<%= item.icon%>" class="modal-image m-3" style="width: 64px;height: 64px">
-    <h4 class="modal-title font-weight-bold ml-2" style="max-width: 150px"><%= item.title%><%if(size !== "none"){%>(<%=size%>)<%}%></h4>
+    <h4 class="modal-title ml-2" style="max-width: 150px"><%= item.title%><%if(size !== "none"){%>(<%=size%>)<%}%></h4>
     <div class="btn-group btn-group-sm d-flex align-items-center ml-auto" role="group">
-        <div class="btn-container d-flex justify-content-center align-items-center">
-            <div type="button" class="btn plus">+</div>
-        </div>
+        <button type="button" class="close plus d-flex align-items-center" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+            </svg>
+        </button>
         <input type="text" class="text-center" value="<%= quantity%>">
-        <div class="btn-container d-flex justify-content-center align-items-center">
-            <div type="button" class="btn minus">-</div>
-        </div>
-    </div>
-    <div class="btn-container d-flex justify-content-center align-items-center ml-auto mr-3">
-        <button type="button" class="close" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+        <button type="button" class="close minus d-flex align-items-center" aria-label="Close">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-dash-circle" viewBox="0 0 16 16">-->
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                <path d="M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z"/>
+            </svg>
         </button>
     </div>
+    <button type="button" class="close close-item ml-auto mr-3 d-flex align-items-center" aria-label="Close">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+        </svg>
+    </button>
 </div>

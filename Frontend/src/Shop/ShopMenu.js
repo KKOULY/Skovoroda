@@ -20,7 +20,11 @@ function showPizzaList(list) {
                 ShopCart.addToCart(item, "none");
             }else {
                 let $size = $node.find(".active");
-                if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+                if($size.text().length>0) {
+                    $node.find(".btn-group").removeClass("is-invalid");
+                    ShopCart.addToCart(item, $size.text());
+                }
+                else $node.find(".btn-group").addClass("is-invalid");
             }
         });
 

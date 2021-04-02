@@ -1,29 +1,26 @@
 #shop-container {
-  #shop-basket {
+  .basket {
     position: fixed;
-    top: 5px;
-    right: 10px;
+    top: 10px;
+    right: 16px;
     transition: 0.5s;
-    .badge {
-      left: -10px;
-      top: -10px;
+    z-index: 5;
+    .total{
+      font-weight: bold;
+      background-color: @foreground-color;
+      color: @background-color;
+    }
+    #shop-basket{
+      color: @foreground-color;
+      .order-count {
+        top: -10px;
+        right: 13px;
+      }
     }
   }
 
-  #staticBackdrop {
-    z-index: 5;
-    .modal-dialog {
-      .btn-container {
-        width: 30px;
-        height: 30px;
-        border: 2px solid black;
-        border-radius: 50%;
-        .btn, input{
-          font-size: 30px;
-          font-weight: bold;
-        }
-      }
-    }
+  .modal-image{
+    box-shadow: 0px 5px 20px -5px rgba(34, 60, 80, 0.46);
   }
 
   .modal-body {
@@ -41,12 +38,18 @@
     margin-top: 20px;
 
     .shop-filter {
-
+      transition: 0.5s;
       .nav-link {
-        padding-right: 32px;
-        padding-left: 32px;
+        margin-right: 32px;
+        margin-left: 32px;
+        padding: 0 5px;
         font-size: 15px;
         color: @foreground-color;
+      }
+      :hover{
+        background-color: @foreground-color;
+        color: @background-color;
+        font-weight: bold;
       }
     }
   }
@@ -75,9 +78,8 @@
 
       .btn-group {
         .btn {
-          width: 40px;
-          color: @foreground-color;
-        }
+           color: @foreground-color;
+         }
       }
     }
   }
@@ -88,4 +90,7 @@
 }
 .modal-backdrop.show {
   z-index: 4;
+}
+#staticBackdrop{
+  z-index: 5;
 }

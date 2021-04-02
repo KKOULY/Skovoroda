@@ -23,20 +23,14 @@ function findCartElementIndex(item, size) {
 
 function addToCart(item, size) {
     //Приклад реалізації, можна робити будь-яким іншим способом
-    $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
+    $(".basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
         start: function() {
-            $(this).css('transform','scale(1.2)');
+            $(this).css('transform','scale(1.2) ');
         },
         done: function() {
             $(this).css('transform','scale(1)');
         },
     });
-    // $("#shop-basket").animate({  textIndent: 0 /* или любое другое не очень-то нужное здесь свойство */ }, {
-    //     step: function() {
-    //         $(this).css('transform','scale(1)');
-    //     },
-    //     duration: 'slow'
-    // }, 'linear');
     let cartIndex = findCartElementIndex(item,size);
     if(Cart[cartIndex]) Cart[cartIndex].quantity += 1;
     else {
@@ -102,7 +96,7 @@ function updateCart() {
                 updateCart();
             }
         });
-        $node.find(".close").click(function(){
+        $node.find(".close-item").click(function(){
             removeFromCart(cart_item);
         });
 
@@ -142,7 +136,11 @@ function showPizzaList(list) {
                 ShopCart.addToCart(item, "none");
             }else {
                 let $size = $node.find(".active");
-                if($size.text().length>0) ShopCart.addToCart(item, $size.text());
+                if($size.text().length>0) {
+                    $node.find(".btn-group").removeClass("is-invalid");
+                    ShopCart.addToCart(item, $size.text());
+                }
+                else $node.find(".btn-group").addClass("is-invalid");
             }
         });
 
@@ -245,9 +243,9 @@ module.exports = shop_info;
 var ejs = require('ejs');
 
 
-exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <%if(item.type === \"Футболка\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n                </div>\r\n            <%}%>\r\n            <%if(item.type === \"Шкарпетки\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle d-flex flex-row\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">38-42</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">43-46</button>\r\n                </div>\r\n            <%}%>\r\n            <div class=\"card-title mt-auto\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
+exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12 pb-3 d-flex justify-content-center mb-5\">\r\n    <div class=\"card\">\r\n        <img src=\"<%= item.icon%>\" class=\"card-img-top p-3\" alt=\"...\">\r\n        <div class=\"card-body d-flex flex-column align-items-center\">\r\n            <div class=\"card-title text-center\"><%= item.title%></div>\r\n            <%if(item.type === \"Футболка\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">S</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">M</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option3\">L</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option4\">XL</button>\r\n                </div>\r\n            <%}%>\r\n            <%if(item.type === \"Шкарпетки\"){%>\r\n                <div class=\"btn-group btn-group-sm btn-group-toggle d-flex flex-row\" data-toggle=\"buttons\">\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option1\">38-42</button>\r\n                    <button class=\"btn btn-dark\"><input type=\"radio\" name=\"options\" id=\"option2\">43-46</button>\r\n                </div>\r\n            <%}%>\r\n            <div class=\"invalid-feedback text-center\">\r\n                Оберіть розмір\r\n            </div>\r\n            <div class=\"card-title mt-auto pt-3\"><%= item.price%><span>$</span></div>\r\n            <button type=\"button\" class=\"btn btn-danger btn-buy\">Купити</button>\r\n        </div>\r\n    </div>\r\n</div>");
 
-exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title font-weight-bold ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn plus\">+</div>\r\n        </div>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <div class=\"btn-container d-flex justify-content-center align-items-center\">\r\n            <div type=\"button\" class=\"btn minus\">-</div>\r\n        </div>\r\n    </div>\r\n    <div class=\"btn-container d-flex justify-content-center align-items-center ml-auto mr-3\">\r\n        <button type=\"button\" class=\"close\" aria-label=\"Close\">\r\n            <span aria-hidden=\"true\">&times;</span>\r\n        </button>\r\n    </div>\r\n</div>");
+exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <button type=\"button\" class=\"close plus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-plus-circle\" viewBox=\"0 0 16 16\">\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z\"/>\r\n            </svg>\r\n        </button>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <button type=\"button\" class=\"close minus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-dash-circle\" viewBox=\"0 0 16 16\">-->\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z\"/>\r\n            </svg>\r\n        </button>\r\n    </div>\r\n    <button type=\"button\" class=\"close close-item ml-auto mr-3 d-flex align-items-center\" aria-label=\"Close\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-x-circle\" viewBox=\"0 0 16 16\">\r\n            <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n            <path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z\"/>\r\n        </svg>\r\n    </button>\r\n</div>");
 },{"ejs":9}],5:[function(require,module,exports){
 function initialise() {
     var Menu = require('./ShopMenu');
@@ -1855,24 +1853,41 @@ exports.cache = {
 
 },{}],11:[function(require,module,exports){
 module.exports={
-  "name": "ejs",
-  "description": "Embedded JavaScript templates",
-  "keywords": [
-    "template",
-    "engine",
-    "ejs"
-  ],
-  "version": "2.7.4",
-  "author": "Matthew Eernisse <mde@fleegix.org> (http://fleegix.org)",
-  "license": "Apache-2.0",
-  "main": "./lib/ejs.js",
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/mde/ejs.git"
+  "_from": "ejs@^2.4.1",
+  "_id": "ejs@2.7.4",
+  "_inBundle": false,
+  "_integrity": "sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==",
+  "_location": "/ejs",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "range",
+    "registry": true,
+    "raw": "ejs@^2.4.1",
+    "name": "ejs",
+    "escapedName": "ejs",
+    "rawSpec": "^2.4.1",
+    "saveSpec": null,
+    "fetchSpec": "^2.4.1"
   },
-  "bugs": "https://github.com/mde/ejs/issues",
-  "homepage": "https://github.com/mde/ejs",
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz",
+  "_shasum": "48661287573dcc53e366c7a1ae52c3a120eec9ba",
+  "_spec": "ejs@^2.4.1",
+  "_where": "D:\\Homework\\Programming_2\\Skovoroda\\Skovoroda",
+  "author": {
+    "name": "Matthew Eernisse",
+    "email": "mde@fleegix.org",
+    "url": "http://fleegix.org"
+  },
+  "bugs": {
+    "url": "https://github.com/mde/ejs/issues"
+  },
+  "bundleDependencies": false,
   "dependencies": {},
+  "deprecated": false,
+  "description": "Embedded JavaScript templates",
   "devDependencies": {
     "browserify": "^13.1.1",
     "eslint": "^4.14.0",
@@ -1886,10 +1901,24 @@ module.exports={
   "engines": {
     "node": ">=0.10.0"
   },
+  "homepage": "https://github.com/mde/ejs",
+  "keywords": [
+    "template",
+    "engine",
+    "ejs"
+  ],
+  "license": "Apache-2.0",
+  "main": "./lib/ejs.js",
+  "name": "ejs",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/mde/ejs.git"
+  },
   "scripts": {
-    "test": "mocha",
-    "postinstall": "node ./postinstall.js"
-  }
+    "postinstall": "node ./postinstall.js",
+    "test": "mocha"
+  },
+  "version": "2.7.4"
 }
 
 },{}],12:[function(require,module,exports){
