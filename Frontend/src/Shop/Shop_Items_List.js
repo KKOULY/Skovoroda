@@ -4,7 +4,7 @@ var shop_info = [
         icon:'images/shirt1.png',
         title: "Футболка \"Сковорода\"",
         color: "чорна",
-        type: 'Футболка',
+        type: 'shirt',
         price: 19,
     },
     {
@@ -12,7 +12,7 @@ var shop_info = [
         icon:'images/shirt2.png',
         title: "Футболка \"Сковорода\"",
         color: "біла",
-        type: 'Футболка',
+        type: 'shirt',
         price: 20,
     },
     {
@@ -20,7 +20,7 @@ var shop_info = [
         icon:'images/shirt3.png',
         title: "Футболка портрет Сковороди",
         color: "біла",
-        type: 'Футболка',
+        type: 'shirt',
         price: 20,
     },
     {
@@ -28,7 +28,7 @@ var shop_info = [
         icon:'images/shirt4.png',
         title: "Футболка портрет Сковороди",
         color: "чорна",
-        type: 'Футболка',
+        type: 'shirt',
         price: 19,
     },
     {
@@ -36,7 +36,7 @@ var shop_info = [
         icon:'images/cup1.png',
         title: "Чашка Сковорода",
         color: "біла",
-        type: 'Чашка',
+        type: 'cup',
         price: 10,
     },
     {
@@ -44,7 +44,7 @@ var shop_info = [
         icon:'images/cup2.png',
         title: "Чашка Сковорода",
         color: "чорна",
-        type: 'Чашка',
+        type: 'cup',
         price: 9,
     },
     {
@@ -52,7 +52,7 @@ var shop_info = [
         icon:'images/socks1.png',
         title: "Шкарпетки Сковорода",
         color: "білі",
-        type: 'Шкарпетки',
+        type: 'socks',
         price: 5,
     },
     {
@@ -60,7 +60,7 @@ var shop_info = [
         icon:'images/socks2.png',
         title: "Шкарпетки Сковорода",
         color: "чорні",
-        type: 'Шкарпетки',
+        type: 'socks',
         price: 4,
     },
 ];

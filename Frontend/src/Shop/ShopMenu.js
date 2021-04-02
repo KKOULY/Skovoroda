@@ -35,21 +35,30 @@ function showPizzaList(list) {
     //$(".pizza-count").text(list.length.toString());
 }
 
-// function filterPizza(filter) {
-//     //Масив куди потраплять піци які треба показати
-//     var pizza_shown = [];
-//
-//     Pizza_List.forEach(function(pizza){
-//         if(filter(pizza)) pizza_shown.push(pizza);
-//     });
-//
-//     //Показати відфільтровані піци
-//     showPizzaList(pizza_shown);
-// }
+function filterItems(item_filter) {
+    //Масив куди потраплять піци які треба показати
+    console.log(item_filter);
+    var item_shown = [];
+    function filter(it, flt){
+        return it.type === flt || flt === "all";
+    }
+    ShopList.forEach(function(item){
+        if(filter(item,item_filter)) item_shown.push(item);
+    });
+
+    //Показати відфільтровані піци
+    showPizzaList(item_shown);
+}
+
 
 function initialiseMenu() {
+    $(".shop-filter").click(function () {
+        console.log("clicked");
+        filterItems($(this).attr("data-toggle"));
+    });
     showPizzaList(ShopList);
 }
+
 
 // exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
