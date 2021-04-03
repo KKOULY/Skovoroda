@@ -16,7 +16,7 @@ function showPizzaList(list) {
         var $node = $(html_code);
 
         $node.find(".btn-buy").click(function(){
-            if(item.type === "Чашка"){
+            if(item.type === "cup"){
                 ShopCart.addToCart(item, "none");
             }else {
                 let $size = $node.find(".active");
