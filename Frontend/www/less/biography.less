@@ -1,36 +1,32 @@
-.paragraphs{
+.paragraphs {
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  background-color: @background-color;
   color: @foreground-color;
   min-width: 37px;
   transition: all 1s ease;
-  .paragraph{
+
+  .paragraph {
     color: @foreground-color;
-    text-align: left;
+    text-align: justify;
     transition: all 1s ease;
-    .paragraphName{
-      display: none;
-    }
-  }
-  .paragraph:focus{
-    text-decoration: none;
   }
   .paragraph:hover{
-    text-decoration: none;
-    font-size: x-large;
-    .paragraphName{
-      display: inline-block;
-    }
+    font-size: large;
   }
 }
-.paragraphs:hover{
-  min-width: 550px;
-}
-#biography{
+#biography {
+  h1{
+    text-align: center;
+    @media(max-width:500px ){
+      font-size: large;
+    }
+  }
   color: @foreground-color;
-  padding-left: 60px;
+  padding-left: 50px;
   padding-right: 50px;
   text-align: justify;
+  @media(min-width:768px ){
+    padding-left: 265px;
+  }
 }
