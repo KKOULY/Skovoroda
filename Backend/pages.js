@@ -15,7 +15,7 @@ exports.bioPage = function(req, res) {
     });
 };
 exports.shopPage = function(req, res) {
-    res.render('shopPage', {
+    res.render('ShopPage', {
         pageTitle: 'Магазин'
     });
 };

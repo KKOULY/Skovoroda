@@ -1,0 +1,68 @@
+var shop_info = [
+    {
+        id:1,
+        icon:'images/shirt1.png',
+        title: "Футболка \"Сковорода\"",
+        color: "чорна",
+        type: 'shirt',
+        price: 19,
+    },
+    {
+        id:2,
+        icon:'images/shirt2.png',
+        title: "Футболка \"Сковорода\"",
+        color: "біла",
+        type: 'shirt',
+        price: 20,
+    },
+    {
+        id:3,
+        icon:'images/shirt3.png',
+        title: "Футболка портрет Сковороди",
+        color: "біла",
+        type: 'shirt',
+        price: 20,
+    },
+    {
+        id:4,
+        icon:'images/shirt4.png',
+        title: "Футболка портрет Сковороди",
+        color: "чорна",
+        type: 'shirt',
+        price: 19,
+    },
+    {
+        id:5,
+        icon:'images/cup1.png',
+        title: "Чашка Сковорода",
+        color: "біла",
+        type: 'cup',
+        price: 10,
+    },
+    {
+        id:6,
+        icon:'images/cup2.png',
+        title: "Чашка Сковорода",
+        color: "чорна",
+        type: 'cup',
+        price: 9,
+    },
+    {
+        id:7,
+        icon:'images/socks1.png',
+        title: "Шкарпетки Сковорода",
+        color: "білі",
+        type: 'socks',
+        price: 5,
+    },
+    {
+        id:8,
+        icon:'images/socks2.png',
+        title: "Шкарпетки Сковорода",
+        color: "чорні",
+        type: 'socks',
+        price: 4,
+    },
+];
+
+module.exports = shop_info;

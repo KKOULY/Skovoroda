@@ -1,6 +1,51 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+var API_URL = "http://localhost:5050";
+
+function backendGet(url, callback) {
+    $.ajax({
+        url: API_URL + url,
+        type: 'GET',
+        success: function(data){
+            callback(null, data);
+        },
+        error: function() {
+            callback(new Error("Ajax Failed"));
+        }
+    })
+}
+
+function backendPost(url, data, callback) {
+    $.ajax({
+        url: API_URL + url,
+        type: 'POST',
+        contentType : 'application/json',
+        data: JSON.stringify(data),
+        success: function(data){
+            callback(null, data);
+        },
+        error: function() {
+            callback(new Error("Ajax Failed"));
+        }
+    })
+}
+
+function getURL() {
+    return API_URL;
+}
+
+exports.getItemsList = function(callback) {
+    backendGet("/api/get-items-list/", callback);
+};
+
+exports.createOrder = function(order_info, callback) {
+    backendPost("/api/create-order/", order_info, callback);
+};
+
+exports.getURL = getURL;
+},{}],2:[function(require,module,exports){
 var Templates = require('./Templates');
 var basil = require("basil.js");
+var API = require('./API');
 var Cart = [];
 var $cart = $("#cart");
 var $totalPrice = $(".total");
@@ -11,6 +56,31 @@ var $totalPrice = $(".total");
 //     updateCart();
 // });
 //
+order_info = {
+    name: undefined,
+    number: undefined,
+    email: undefined,
+    items: undefined
+}
+
+function orderSendCheck(error, rdata){
+    if(error === null){
+        LiqPayCheckout.init({
+            data:  rdata.data,
+            signature:  rdata.signature,
+            embedTo:  "#liqpay",
+            mode:  "popup"  //  embed  ||  popup
+        }).on("liqpay.callback",  function(data){
+            console.log(data.status);
+            console.log(data);
+        }).on("liqpay.ready",  function(data){
+//  ready
+        }).on("liqpay.close",  function(data){
+//  close
+        });
+    }
+}
+
 function findCartElementIndex(item, size) {
     let idx = undefined;
     Cart.forEach( (i,index) => {
@@ -62,6 +132,27 @@ function initialiseCart() {
     var saved_carts = basil.localStorage.get("cart");
     if(saved_carts) Cart = JSON.parse(saved_carts);
     updateCart();
+
+    $("#createOrderBtn").click(function () {
+        function allValid() {
+            // if($("#inputName").val().length>0 && $("#inputNumber").val().length>0 && $("#inputEmail").val().length>0) return true;
+            return true;
+        }
+        if(allValid()){
+            console.log("dsds");
+            order_info.name = $("#inputName").val();
+            order_info.number = $("#inputNumber").val();
+            order_info.address = $("#inputEmail").val();
+            var saved_carts = basil.localStorage.get("cart");
+            if(saved_carts) {
+                console.log("dfdfdsfdsfdsf");
+                order_info.items = JSON.parse(saved_carts);
+                API.createOrder(order_info, orderSendCheck);
+                // var url = API.getURL()+"/payment.html";
+                // $(location).attr('href',url);
+            }
+        }
+    })
 }
 
 function getItemsInCart() {
@@ -113,15 +204,23 @@ exports.addToCart = addToCart;
 
 exports.getItemsInCart = getItemsInCart;
 exports.initialiseCart = initialiseCart;
-},{"./Templates":4,"basil.js":7}],2:[function(require,module,exports){
+},{"./API":1,"./Templates":4,"basil.js":7}],3:[function(require,module,exports){
 var Templates = require('./Templates');
 var ShopCart = require('./ShopCart');
-var ShopList = require('./Shop_Items_List');
+var API = require('./API');
+var ShopList = [];
 
 //HTML едемент куди будуть додаватися піци
 var $shop_list = $("#shop-list");
 
-function showPizzaList(list) {
+function initItemsList(error, data){
+    if (error === null){
+        ShopList = data;
+        showItemsList(ShopList);
+    }
+}
+
+function showItemsList(list) {
     //Очищаємо старі піци в кошику
     $shop_list.html("");
 
@@ -163,91 +262,25 @@ function filterItems(item_filter) {
     });
 
     //Показати відфільтровані піци
-    showPizzaList(item_shown);
+    showItemsList(item_shown);
 }
 
 
 function initialiseMenu() {
+    API.getItemsList(initItemsList);
+
     $(".shop-filter").click(function () {
         console.log("clicked");
         filterItems($(this).attr("data-toggle"));
     });
-    showPizzaList(ShopList);
+
+    showItemsList(ShopList);
 }
 
 
 // exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
-},{"./ShopCart":1,"./Shop_Items_List":3,"./Templates":4}],3:[function(require,module,exports){
-var shop_info = [
-    {
-        id:1,
-        icon:'images/shirt1.png',
-        title: "Футболка \"Сковорода\"",
-        color: "чорна",
-        type: 'shirt',
-        price: 19,
-    },
-    {
-        id:2,
-        icon:'images/shirt2.png',
-        title: "Футболка \"Сковорода\"",
-        color: "біла",
-        type: 'shirt',
-        price: 20,
-    },
-    {
-        id:3,
-        icon:'images/shirt3.png',
-        title: "Футболка портрет Сковороди",
-        color: "біла",
-        type: 'shirt',
-        price: 20,
-    },
-    {
-        id:4,
-        icon:'images/shirt4.png',
-        title: "Футболка портрет Сковороди",
-        color: "чорна",
-        type: 'shirt',
-        price: 19,
-    },
-    {
-        id:5,
-        icon:'images/cup1.png',
-        title: "Чашка Сковорода",
-        color: "біла",
-        type: 'cup',
-        price: 10,
-    },
-    {
-        id:6,
-        icon:'images/cup2.png',
-        title: "Чашка Сковорода",
-        color: "чорна",
-        type: 'cup',
-        price: 9,
-    },
-    {
-        id:7,
-        icon:'images/socks1.png',
-        title: "Шкарпетки Сковорода",
-        color: "білі",
-        type: 'socks',
-        price: 5,
-    },
-    {
-        id:8,
-        icon:'images/socks2.png',
-        title: "Шкарпетки Сковорода",
-        color: "чорні",
-        type: 'socks',
-        price: 4,
-    },
-];
-
-module.exports = shop_info;
-},{}],4:[function(require,module,exports){
+},{"./API":1,"./ShopCart":2,"./Templates":4}],4:[function(require,module,exports){
 
 var ejs = require('ejs');
 
@@ -263,7 +296,7 @@ function initialise() {
     Menu.initialiseMenu();
 };
 exports.initialise = initialise;
-},{"./ShopCart":1,"./ShopMenu":2}],6:[function(require,module,exports){
+},{"./ShopCart":2,"./ShopMenu":3}],6:[function(require,module,exports){
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
