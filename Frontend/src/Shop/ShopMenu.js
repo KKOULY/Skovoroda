@@ -1,11 +1,19 @@
 var Templates = require('./Templates');
 var ShopCart = require('./ShopCart');
-var ShopList = require('./Shop_Items_List');
+var API = require('./API');
+var ShopList = [];
 
 //HTML едемент куди будуть додаватися піци
 var $shop_list = $("#shop-list");
 
-function showPizzaList(list) {
+function initItemsList(error, data){
+    if (error === null){
+        ShopList = data;
+        showItemsList(ShopList);
+    }
+}
+
+function showItemsList(list) {
     //Очищаємо старі піци в кошику
     $shop_list.html("");
 
@@ -47,16 +55,19 @@ function filterItems(item_filter) {
     });
 
     //Показати відфільтровані піци
-    showPizzaList(item_shown);
+    showItemsList(item_shown);
 }
 
 
 function initialiseMenu() {
+    API.getItemsList(initItemsList);
+
     $(".shop-filter").click(function () {
         console.log("clicked");
         filterItems($(this).attr("data-toggle"));
     });
-    showPizzaList(ShopList);
+
+    showItemsList(ShopList);
 }
 
 
