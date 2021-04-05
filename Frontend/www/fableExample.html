@@ -47,7 +47,7 @@
         this.querySelectorAll(".background-item").forEach(layer => {
             const speed = 5;
             const  x = (window.innerWidth - e.pageX*speed)/100;
-            const  y = (window.innerHeight - e.pageY*speed)/100;
+            const y = (window.innerHeight - e.clientY * speed) / 100;
 
             layer.style.transform = `translateX(${x}px) translateY(${y}px)`
         })
