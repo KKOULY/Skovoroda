@@ -17,9 +17,10 @@
     </script>
 
     <!-- Bootsrap CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css"
+          integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <!-- LESS основний файл -->
-    <link rel="stylesheet/less" type="text/css" href="less/main.less" />
+    <link rel="stylesheet/less" type="text/css" href="less/main.less"/>
     <!-- LESS JavaScript компілятор -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/less.js/2.5.3/less.min.js"></script>
 
@@ -32,7 +33,7 @@
             <path d="M3 15h18v-2H3v2zm0 4h18v-2H3v2zm0-8h18V9H3v2zm0-6v2h18V5H3z"/>
         </svg>
     </div>
-    <h3 class="title m-0 d-none d-sm-block">Світ Сковороди</h3>
+    <a href="http://localhost:5050/" class="btn"><h3 class="title m-0">Світ Сковороди</h3></a>
 </div>
 <section id="shop-container">
     <div class="basket">
@@ -46,22 +47,26 @@
         </div>
     </div>
     <!-- Modal -->
-    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal fade" id="staticBackdrop" data-backdrop="static" tabindex="-1" role="dialog"
+         aria-labelledby="staticBackdropLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title font-weight-bold" id="staticBackdropLabel">Замовлення</h5>
-                        <button type="button" class="close pl-0 ml-0" aria-label="Close" data-dismiss="modal" style="color: red">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-x-circle" viewBox="0 0 16 16">
-                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
-                            </svg>
-                        </button>
+                    <button type="button" class="close pl-0 ml-0" aria-label="Close" data-dismiss="modal"
+                            style="color: red">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                             class="bi bi-x-circle" viewBox="0 0 16 16">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                        </svg>
+                    </button>
                 </div>
                 <div class="modal-body" id="cart">
                 </div>
                 <div class="modal-footer flex-column">
-                    <h5 class="modal-title font-weight-bold ml-auto">Ціна:<span class="price total">100<span>$</span></span></h5>
+                    <h5 class="modal-title font-weight-bold ml-auto">Ціна:<span
+                            class="price total">100<span>$</span></span></h5>
                     <form class="w-100">
                         <div class="form-group">
                             <label for="exampleInputName">Ваше Ім'я</label>
@@ -77,7 +82,8 @@
                         </div>
                         <button type="submit" class="btn btn-dark w-100" id="#createOrderBtn">Замовити</button>
                         <div class="row d-flex justify-content-center m-0 pt-3">
-                            <small class="text-muted text-center">Натискаючи на кнопку, ви даєте згоду на обробку персональних даних та погоджуєтеся c політикою конфіденційності.</small>
+                            <small class="text-muted text-center">Натискаючи на кнопку, ви даєте згоду на обробку
+                                персональних даних та погоджуєтеся c політикою конфіденційності.</small>
                         </div>
                     </form>
                 </div>
@@ -105,20 +111,25 @@
 <div id="menu" class="menuHidden">
     <div class="group buttonInMenu">
         <div class="item">
-            <div class="btn">Життєпис</div>
+            <a class="btn" href="http://localhost:5050/biography.html">Життєпис</a>
         </div>
         <div class="item">
-            <div class="btn">Творчість</div>
+            <a class="btn">Творчість</a>
         </div>
         <div class="item">
-            <div class="btn">Магазин</div>
+            <a class="btn" href="http://localhost:5050/shop.html">Магазин</a>
         </div>
     </div>
-    <img src="images/book1.png" data-speed="4" class="background-image" style="top:10vh;left: 10vw;transform: rotate(15deg);">
-    <img src="images/book2.png" data-speed="-6" class="background-image" style="top:10vh;left: 60vw;transform: rotate(-15deg);">
-    <img src="images/book2.png" data-speed="-5" class="background-image" style="top:80vh;left: 5vw;transform: rotate(-15deg);">
-    <img src="images/book3.png" data-speed="-5" class="background-image" style="top:30vh;left: 85vw;transform: rotate(-15deg);">
-    <img src="images/book1.png" data-speed="4" class="background-image" style="top:65vh;left: 70vw;transform: rotate(-30deg);">
+    <img src="images/book1.png" data-speed="4" class="background-image"
+         style="top:10vh;left: 10vw;transform: rotate(15deg);">
+    <img src="images/book2.png" data-speed="-6" class="background-image"
+         style="top:10vh;left: 60vw;transform: rotate(-15deg);">
+    <img src="images/book2.png" data-speed="-5" class="background-image"
+         style="top:80vh;left: 5vw;transform: rotate(-15deg);">
+    <img src="images/book3.png" data-speed="-5" class="background-image"
+         style="top:30vh;left: 85vw;transform: rotate(-15deg);">
+    <img src="images/book1.png" data-speed="4" class="background-image"
+         style="top:65vh;left: 70vw;transform: rotate(-30deg);">
     <img src="images/book3.png" data-speed="5" class="background-image" style="top:55vh;left: 20vw">
 </div>
 
@@ -131,16 +142,18 @@
             const x = (window.innerWidth - e.pageX * speed) / 100;
             const y = (window.innerHeight - e.clientY * speed) / 100;
 
-            layer.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${(x+y)/2}deg)`
+            layer.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${(x + y) / 2}deg)`
         })
     }
 </script>
 
 <!--Bootsrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns"
+        crossorigin="anonymous"></script>
 
 <!--Own JavaScript -->
-<script type="text/javascript"  src="js/main.js"> </script>
+<script type="text/javascript" src="js/main.js"></script>
 
 </body>
 

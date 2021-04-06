@@ -35,3 +35,14 @@ $(function () {
         curs.style.visibility = 'hidden';
     }
 });
+
+// $("#bioButton").click(function () {
+//    window.location.href="http://localhost:5050/biography.html";
+// });
+// $("#artButton").click(function () {
+// //   window.location.href=
+//     alert("to do");
+// });
+// $("#bioButton").click(function () {
+//    window.location.href="http://localhost:5050/biography.html";
+// });
