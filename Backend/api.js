@@ -7,6 +7,13 @@ exports.getItemsList = function(req, res) {
     res.send(Items_List);
 };
 
+// library content (list of compositions)
+// added 17.04 by BRomanchuk
+var Compositions_List = require('./data/CompositionList');
+exports.getCompositionsList = function (req, res) {
+    res.send(Compositions_List);
+}
+
 exports.createOrder = function(req, res) {
     var order_info = req.body;
     console.log("Creating Order", order_info);

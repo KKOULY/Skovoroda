@@ -1,6 +1,12 @@
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
+
+    // library content
+    // added 17.04 by BRomanchuk
+    var Library = require('./Library/library');
+    Library.initCompositions();
+
     $("#openMenuButton").click(function () {
         if ($("#menu").hasClass("menuHidden")) {
             $("body").addClass("modal-open");
