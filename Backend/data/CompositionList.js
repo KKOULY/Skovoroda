@@ -13,7 +13,7 @@ const compositionList = [
         id: 2,
         title: 'всякому городу нрав і права',
         icon: 'images/library/12.jpg',
-        text: ''
+        text: 'c2.txt'
     },
     {
         id: 3,
