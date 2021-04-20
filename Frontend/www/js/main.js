@@ -1,90 +1,48 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-const compositionList = [
-    {
-        id: 1,
-        title: 'de libertate',
-        icon: 'images/library/11.jpg',
-        text: ''
-    },
-    {
-        id: 2,
-        title: 'всякому городу нрав і права',
-        icon: 'images/library/12.jpg',
-        text: ''
-    },
-    {
-        id: 3,
-        title: 'бджола і шершень',
-        icon: 'images/library/13.jpg',
-        text: ''
-    },
-    {
-        id: 4,
-        title: 'сад божествених пісень',
-        icon: 'images/library/14.jpg',
-        text: ''
-    },
-    {
-        id: 5,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    },
-    {
-        id: 6,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    },
-    {
-        id: 7,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    },
-    {
-        id: 8,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    },
-    {
-        id: 9,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    },
-    {
-        id: 10,
-        title: 'composition',
-        icon: 'images/library/alt.jpg',
-        text: ''
-    }
-]
-
-module.exports = compositionList;
-},{}],2:[function(require,module,exports){
 const Templates = require('../Shop/Templates');
-const CompositionList = require('./CompositionList');
+const API = require('../Shop/API');
 
 // element to which cards are added
 const $composition_list = $("#composition-list");
+var CompositionsList = [];
 
-function initCompositions() {
+
+function initCompositionsList(error, data){
+    if (error === null){
+        CompositionsList = data;
+        showCompositions(CompositionsList);
+    }
+}
+
+// for post func
+function logText(error, data) {
+    if (error === null) {
+        console.log(data);
+    }
+}
+function showCompositions() {
     $composition_list.html('');
-    CompositionList.forEach(initOneItem);
 
     function initOneItem(item) {
         var html_code = Templates.Composition_OneItem({composition: item});
         var $node = $(html_code);
 
-        $($node).click(function(){
-            // TODO click function for getting text
-            console.log('clicked');
+        $($node).click(function(){/*
+            API.readComposition({
+                сompositionId: 1,
+                compositionTitle: 'CompTitle',
+                compositionText: 'CompText'
+            }, logText);*/
         });
 
         $composition_list.append($node);
     }
+    CompositionsList.forEach(initOneItem);
+}
+
+
+function initCompositions() {
+    API.getCompositionsList(initCompositionsList)
 }
 
 // exports
@@ -92,7 +50,7 @@ exports.initCompositions = initCompositions;
 
 
 
-},{"../Shop/Templates":6,"./CompositionList":1}],3:[function(require,module,exports){
+},{"../Shop/API":2,"../Shop/Templates":5}],2:[function(require,module,exports){
 var API_URL = "http://localhost:5050";
 
 function backendGet(url, callback) {
@@ -127,6 +85,11 @@ function getURL() {
     return API_URL;
 }
 
+// get composition list
+exports.getCompositionsList = function (callback) {
+    backendGet("/api/get-compositions-list/", callback);
+};
+
 exports.getItemsList = function(callback) {
     backendGet("/api/get-items-list/", callback);
 };
@@ -136,7 +99,7 @@ exports.createOrder = function(order_info, callback) {
 };
 
 exports.getURL = getURL;
-},{}],4:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 var Templates = require('./Templates');
 var basil = require("basil.js");
 var API = require('./API');
@@ -298,7 +261,7 @@ exports.addToCart = addToCart;
 
 exports.getItemsInCart = getItemsInCart;
 exports.initialiseCart = initialiseCart;
-},{"./API":3,"./Templates":6,"basil.js":9}],5:[function(require,module,exports){
+},{"./API":2,"./Templates":5,"basil.js":8}],4:[function(require,module,exports){
 var Templates = require('./Templates');
 var ShopCart = require('./ShopCart');
 var API = require('./API');
@@ -374,7 +337,7 @@ function initialiseMenu() {
 
 // exports.filterPizza = filterPizza;
 exports.initialiseMenu = initialiseMenu;
-},{"./API":3,"./ShopCart":4,"./Templates":6}],6:[function(require,module,exports){
+},{"./API":2,"./ShopCart":3,"./Templates":5}],5:[function(require,module,exports){
 
 var ejs = require('ejs');
 
@@ -384,8 +347,8 @@ exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12
 exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <button type=\"button\" class=\"close plus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-plus-circle\" viewBox=\"0 0 16 16\">\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z\"/>\r\n            </svg>\r\n        </button>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <button type=\"button\" class=\"close minus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-dash-circle\" viewBox=\"0 0 16 16\">-->\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z\"/>\r\n            </svg>\r\n        </button>\r\n    </div>\r\n    <button type=\"button\" class=\"close close-item ml-auto mr-3 d-flex align-items-center\" aria-label=\"Close\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-x-circle\" viewBox=\"0 0 16 16\">\r\n            <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n            <path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z\"/>\r\n        </svg>\r\n    </button>\r\n</div>");
 
 // added template of a composition
-exports.Composition_OneItem = ejs.compile("<div class=\"card__item\">\n    <div class=\"card__inner\">\n        <div class=\"card__img\">\n            <img src=\"<%= composition.icon %>\" alt=\"images/library/14.jpg\">\n        </div>\n        <div class=\"card__text\">\n        <span class=\"composition-title\">\n            <%= composition.title %>\n        </span>\n        </div>\n    </div>\n</div>")
-},{"ejs":11}],7:[function(require,module,exports){
+exports.Composition_OneItem = ejs.compile("<div class=\"card__item\">\n    <a href=\"http://localhost:5050/read<%= composition.id %>.html\">\n        <div class=\"card__inner\">\n            <div class=\"card__img\">\n                <img src=\"<%= composition.icon %>\" alt=\"images/library/14.jpg\">\n            </div>\n            <div class=\"card__text\">\n                <span class=\"composition-title\">\n                    <%= composition.title %>\n                </span>\n            </div>\n        </div>\n    </a>\n\n</div>")
+},{"ejs":10}],6:[function(require,module,exports){
 function initialise() {
     var Menu = require('./ShopMenu');
     var Cart = require('./ShopCart');
@@ -393,7 +356,7 @@ function initialise() {
     Menu.initialiseMenu();
 };
 exports.initialise = initialise;
-},{"./ShopCart":4,"./ShopMenu":5}],8:[function(require,module,exports){
+},{"./ShopCart":3,"./ShopMenu":4}],7:[function(require,module,exports){
 $(function () {
     var Shop = require('./Shop/shop');
     Shop.initialise();
@@ -449,7 +412,7 @@ $(function () {
 //    window.location.href="http://localhost:5050/biography.html";
 // });
 
-},{"./Library/library":2,"./Shop/shop":7}],9:[function(require,module,exports){
+},{"./Library/library":1,"./Shop/shop":6}],8:[function(require,module,exports){
 (function () {
 	// Basil
 	var Basil = function (options) {
@@ -854,9 +817,9 @@ $(function () {
 
 })();
 
-},{}],10:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 
-},{}],11:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -1838,7 +1801,7 @@ if (typeof window != 'undefined') {
   window.ejs = exports;
 }
 
-},{"../package.json":13,"./utils":12,"fs":10,"path":14}],12:[function(require,module,exports){
+},{"../package.json":12,"./utils":11,"fs":9,"path":13}],11:[function(require,module,exports){
 /*
  * EJS Embedded JavaScript templates
  * Copyright 2112 Matthew Eernisse (mde@fleegix.org)
@@ -2007,7 +1970,7 @@ exports.cache = {
   }
 };
 
-},{}],13:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 module.exports={
   "_args": [
     [
@@ -2080,7 +2043,7 @@ module.exports={
   "version": "2.7.4"
 }
 
-},{}],14:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 (function (process){
 // .dirname, .basename, and .extname methods are extracted from Node.js v8.11.1,
 // backported and transplited with Babel, with backwards-compat fixes
@@ -2386,7 +2349,7 @@ var substr = 'ab'.substr(-1) === 'b'
 ;
 
 }).call(this,require('_process'))
-},{"_process":15}],15:[function(require,module,exports){
+},{"_process":14}],14:[function(require,module,exports){
 // shim for using process in browser
 var process = module.exports = {};
 
@@ -2572,4 +2535,4 @@ process.chdir = function (dir) {
 };
 process.umask = function() { return 0; };
 
-},{}]},{},[8]);
+},{}]},{},[7]);

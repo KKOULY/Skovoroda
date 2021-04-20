@@ -12,12 +12,18 @@ function configureEndpoints(app) {
     app.get('/api/get-items-list/', api.getItemsList);
     app.post('/api/create-order/', api.createOrder);
 
+    // get list of compositions
+    app.get('/api/get-compositions-list/', api.getCompositionsList);
+
     //Сторінки
     //Головна сторінка
     app.get('/', pages.mainPage);
 
     //Сторінка бібліотеки
     app.get('/library.html', pages.libraryPage);
+
+    // read page with id of the composition
+    app.get('/read:id.html', pages.readPage);
 
     //Сторінка біографії
     app.get('/bio.html', pages.bioPage);

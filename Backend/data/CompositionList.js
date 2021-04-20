@@ -26,7 +26,44 @@ const compositionList = [
         title: 'сад божествених пісень',
         icon: 'images/library/14.jpg',
         text: ''
+    },
+    {
+        id: 5,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
+    },
+    {
+        id: 6,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
+    },
+    {
+        id: 7,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
+    },
+    {
+        id: 8,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
+    },
+    {
+        id: 9,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
+    },
+    {
+        id: 10,
+        title: 'composition',
+        icon: 'images/library/alt.jpg',
+        text: ''
     }
 ]
+
 
 module.exports = compositionList;

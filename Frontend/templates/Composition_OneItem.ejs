@@ -1,12 +1,15 @@
 <div class="card__item">
-    <div class="card__inner">
-        <div class="card__img">
-            <img src="<%= composition.icon %>" alt="images/library/14.jpg">
+    <a href="http://localhost:5050/read<%= composition.id %>.html">
+        <div class="card__inner">
+            <div class="card__img">
+                <img src="<%= composition.icon %>" alt="images/library/14.jpg">
+            </div>
+            <div class="card__text">
+                <span class="composition-title">
+                    <%= composition.title %>
+                </span>
+            </div>
         </div>
-        <div class="card__text">
-        <span class="composition-title">
-            <%= composition.title %>
-        </span>
-        </div>
-    </div>
+    </a>
+
 </div>

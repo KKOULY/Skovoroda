@@ -1,14 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5502f91d-86c0-408e-9485-fc394cf4352c" name="Default Changelist" comment="" />
+    <list default="true" id="5502f91d-86c0-408e-9485-fc394cf4352c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Backend/TextReader.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/data/Compositions/c1.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/views/Footer.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Backend/views/readPage.ejs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/www/js/forReadPage.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Frontend/www/less/readPage.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/data/CompositionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/data/CompositionList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/views/libraryPage.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/views/libraryPage.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Library/CompositionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Library/CompositionList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Library/library.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Library/library.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/src/Shop/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Shop/API.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/templates/Composition_OneItem.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/templates/Composition_OneItem.ejs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/www/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/www/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/www/less/main.less" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/www/less/main.less" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="1pzVF0tDh3otxASVJZ2EA7bpDWd" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -20,7 +53,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../hw7" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/Frontend/www/images/library" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -33,6 +66,10 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\kmbs\OneDrive - kmbs\Документи\GitHub\Skovoroda\Frontend\www\images\library" />
+      <recent name="C:\Users\kmbs\OneDrive - kmbs\Документи\GitHub\Skovoroda\Backend\data" />
+      <recent name="C:\Users\kmbs\OneDrive - kmbs\Документи\GitHub\Skovoroda\Frontend\templates" />
+      <recent name="C:\Users\kmbs\OneDrive - kmbs\Документи\GitHub\Skovoroda\Frontend\src\Library" />
       <recent name="D:\Homework\Programming_2\Skovoroda\Skovoroda\Frontend\www\images" />
     </key>
   </component>
@@ -51,7 +88,19 @@
       <workItem from="1616488520877" duration="695000" />
       <workItem from="1616515003614" duration="8715000" />
       <workItem from="1617035646809" duration="139000" />
+      <workItem from="1618668861248" duration="3361000" />
+      <workItem from="1618672262174" duration="9504000" />
+      <workItem from="1618820673311" duration="6552000" />
+      <workItem from="1618862957475" duration="30252000" />
     </task>
+    <task id="LOCAL-00001" summary="MVC for library">
+      <created>1618691831699</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1618691831699</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -68,5 +117,19 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="MVC for library" />
+    <option name="LAST_COMMIT_MESSAGE" value="MVC for library" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/Frontend/src/Library/CompositionList.js</url>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

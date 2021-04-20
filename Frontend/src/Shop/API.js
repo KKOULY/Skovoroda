@@ -32,6 +32,11 @@ function getURL() {
     return API_URL;
 }
 
+// get composition list
+exports.getCompositionsList = function (callback) {
+    backendGet("/api/get-compositions-list/", callback);
+};
+
 exports.getItemsList = function(callback) {
     backendGet("/api/get-items-list/", callback);
 };

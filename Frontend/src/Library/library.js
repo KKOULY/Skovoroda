@@ -1,24 +1,47 @@
 const Templates = require('../Shop/Templates');
-const CompositionList = require('./CompositionList');
+const API = require('../Shop/API');
 
 // element to which cards are added
 const $composition_list = $("#composition-list");
+var CompositionsList = [];
 
-function initCompositions() {
+
+function initCompositionsList(error, data){
+    if (error === null){
+        CompositionsList = data;
+        showCompositions(CompositionsList);
+    }
+}
+
+// for post func
+function logText(error, data) {
+    if (error === null) {
+        console.log(data);
+    }
+}
+function showCompositions() {
     $composition_list.html('');
-    CompositionList.forEach(initOneItem);
 
     function initOneItem(item) {
         var html_code = Templates.Composition_OneItem({composition: item});
         var $node = $(html_code);
 
-        $($node).click(function(){
-            // TODO click function for getting text
-            console.log('clicked');
+        $($node).click(function(){/*
+            API.readComposition({
+                сompositionId: 1,
+                compositionTitle: 'CompTitle',
+                compositionText: 'CompText'
+            }, logText);*/
         });
 
         $composition_list.append($node);
     }
+    CompositionsList.forEach(initOneItem);
+}
+
+
+function initCompositions() {
+    API.getCompositionsList(initCompositionsList)
 }
 
 // exports
