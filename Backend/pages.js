@@ -30,14 +30,14 @@ exports.readPage = function (req, res) {
 
     for (let i = 0; i < compositionsList.length; i++) {
         if (compositionsList[i].id == id) {
-            pathToTextFile.concat(compositionsList[i].text);
+            pathToTextFile += compositionsList[i].text;
             title = compositionsList[i].title;
         }
     }
 
     const fs = require('fs');
     try {
-        text = fs.readFileSync(__dirname + pathToTextFile, 'utf8');
+        text = fs.readFileSync(__dirname + pathToTextFile, 'utf-8');
     } catch (err) {
         text = err;
     }

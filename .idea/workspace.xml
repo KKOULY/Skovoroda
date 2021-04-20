@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5502f91d-86c0-408e-9485-fc394cf4352c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Backend/TextReader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/data/Compositions/c1.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/views/Footer.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Backend/views/readPage.ejs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/www/js/forReadPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Frontend/www/less/readPage.less" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/data/CompositionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/data/CompositionList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/TextReader.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/data/Compositions/c1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/data/Compositions/c1.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Backend/pages.js" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/pages.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Backend/views/libraryPage.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/views/libraryPage.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Library/CompositionList.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Library/CompositionList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Backend/views/readPage.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Backend/views/readPage.ejs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Frontend/src/Library/library.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Library/library.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/src/Shop/API.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/src/Shop/API.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/templates/Composition_OneItem.ejs" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/templates/Composition_OneItem.ejs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/www/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/www/js/main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Frontend/www/less/main.less" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/www/less/main.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Frontend/www/less/readPage.less" beforeDir="false" afterPath="$PROJECT_DIR$/Frontend/www/less/readPage.less" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -91,7 +81,7 @@
       <workItem from="1618668861248" duration="3361000" />
       <workItem from="1618672262174" duration="9504000" />
       <workItem from="1618820673311" duration="6552000" />
-      <workItem from="1618862957475" duration="30252000" />
+      <workItem from="1618862957475" duration="37643000" />
     </task>
     <task id="LOCAL-00001" summary="MVC for library">
       <created>1618691831699</created>
@@ -100,7 +90,21 @@
       <option name="project" value="LOCAL" />
       <updated>1618691831699</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="back for library">
+      <created>1618951089316</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1618951089316</updated>
+    </task>
+    <task id="LOCAL-00003" summary="back for library">
+      <created>1618954887316</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1618954887316</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -120,7 +124,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="MVC for library" />
-    <option name="LAST_COMMIT_MESSAGE" value="MVC for library" />
+    <MESSAGE value="back for library" />
+    <option name="LAST_COMMIT_MESSAGE" value="back for library" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
