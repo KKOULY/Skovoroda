@@ -21,41 +21,27 @@ exports.shopPage = function(req, res) {
 };
 
 exports.readPage = function (req, res) {
-    var compositionsList = require('./data/CompositionList');
+    let compositionsList = require('./data/CompositionList');
+    let pathToTextFile = '/data/Compositions/';
 
-    var id = req.params.id;
-    var pathToTextFile = './data/Compositions/';
-
-    var title = 'hellotitle';
-    var text = 'hello';
+    let id = req.params.id;
+    let title = '';
+    let text = '';
 
     for (let i = 0; i < compositionsList.length; i++) {
-
         if (compositionsList[i].id == id) {
-            pathToTextFile += compositionsList[i].text;
+            pathToTextFile.concat(compositionsList[i].text);
             title = compositionsList[i].title;
         }
     }
 
-    console.log(pathToTextFile);
-    /*
     const fs = require('fs');
     try {
-        text = fs.readFileSync(pathToTextFile, 'utf8')
-        console.log(text)
+        text = fs.readFileSync(__dirname + pathToTextFile, 'utf8');
     } catch (err) {
-        console.error(err)
+        text = err;
     }
-    /*
-    var reader = new global.FileReader();
-    reader.onload = function () {
-        text = reader.result;
-        console.log(text);
-    }
-    /*
-    var textReader = require('./TextReader');
-     = textReader(pathToTextFile);
-    */
+
     res.render('readPage', {
         pageTitle: 'readPage',
         compositionTitle: title,

@@ -7,7 +7,7 @@ const compositionList = [
         id: 1,
         title: 'de libertate',
         icon: 'images/library/11.jpg',
-        text: ''
+        text: 'c1.txt'
     },
     {
         id: 2,
