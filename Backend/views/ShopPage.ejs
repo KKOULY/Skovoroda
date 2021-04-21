@@ -70,50 +70,57 @@
     </div>
 </section>
 
-<div id="menu" class="menuHidden">
-    <div class="group buttonInMenu">
-        <div class="item">
-            <a class="btn" href="http://localhost:5050/biography.html">Життєпис</a>
-        </div>
-        <div class="item">
-            <a class="btn" href="http://localhost:5050/library.html">Творчість</a>
-        </div>
-        <div class="item">
-            <a class="btn" href="http://localhost:5050/shop.html">Магазин</a>
-        </div>
-    </div>
-    <img src="images/book1.png" data-speed="4" class="background-image" style="top:10vh;left: 10vw;transform: rotate(15deg);">
-    <img src="images/book2.png" data-speed="-6" class="background-image" style="top:10vh;left: 60vw;transform: rotate(-15deg);">
-    <img src="images/book2.png" data-speed="-5" class="background-image" style="top:80vh;left: 5vw;transform: rotate(-15deg);">
-    <img src="images/book3.png" data-speed="-5" class="background-image" style="top:30vh;left: 85vw;transform: rotate(-15deg);">
-    <img src="images/book1.png" data-speed="4" class="background-image" style="top:65vh;left: 70vw;transform: rotate(-30deg);">
-    <img src="images/book3.png" data-speed="5" class="background-image" style="top:55vh;left: 20vw">
-</div>
+<!--<div id="menu" class="menuHidden">-->
+<!--    <div class="group buttonInMenu">-->
+<!--        <div class="item">-->
+<!--            <a class="btn" href="http://localhost:5050/biography.html">Життєпис</a>-->
+<!--        </div>-->
+<!--        <div class="item">-->
+<!--            <a class="btn" href="http://localhost:5050/library.html">Творчість</a>-->
+<!--        </div>-->
+<!--        <div class="item">-->
+<!--            <a class="btn" href="http://localhost:5050/shop.html">Магазин</a>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--    <img src="images/book1.png" data-speed="4" class="background-image" style="top:10vh;left: 10vw;transform: rotate(15deg);">-->
+<!--    <img src="images/book2.png" data-speed="-6" class="background-image" style="top:10vh;left: 60vw;transform: rotate(-15deg);">-->
+<!--    <img src="images/book2.png" data-speed="-5" class="background-image" style="top:80vh;left: 5vw;transform: rotate(-15deg);">-->
+<!--    <img src="images/book3.png" data-speed="-5" class="background-image" style="top:30vh;left: 85vw;transform: rotate(-15deg);">-->
+<!--    <img src="images/book1.png" data-speed="4" class="background-image" style="top:65vh;left: 70vw;transform: rotate(-30deg);">-->
+<!--    <img src="images/book3.png" data-speed="5" class="background-image" style="top:55vh;left: 20vw">-->
+<!--</div>-->
+<!--<div id="liqpay"></div>-->
+<!--&lt;!&ndash; піключаємо скрипт &ndash;&gt;-->
+<!--<script  src="//static.liqpay.ua/libjs/checkout.js">-->
+<!--</script>-->
+
+<!--<script type="text/javascript">-->
+<!--    document.addEventListener("mousemove", parallax);-->
+
+<!--    function parallax(e) {-->
+<!--        this.querySelectorAll(".background-image").forEach(layer => {-->
+<!--            const speed = layer.getAttribute("data-speed");-->
+<!--            const x = (window.innerWidth - e.pageX * speed) / 100;-->
+<!--            const y = (window.innerHeight - e.pageY * speed) / 100;-->
+
+<!--            layer.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${(x+y)/2}deg)`-->
+<!--        })-->
+<!--    }-->
+<!--</script>-->
+
+<!--&lt;!&ndash;Bootsrap JavaScript &ndash;&gt;-->
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>-->
+
+<!--&lt;!&ndash;Own JavaScript &ndash;&gt;-->
+<!--<script type="text/javascript"  src="js/main.js"> </script>-->
+
+<!--</body>-->
+
+<!--</html>-->
+
 <div id="liqpay"></div>
 <!-- піключаємо скрипт -->
 <script  src="//static.liqpay.ua/libjs/checkout.js">
 </script>
 
-<script type="text/javascript">
-    document.addEventListener("mousemove", parallax);
-
-    function parallax(e) {
-        this.querySelectorAll(".background-image").forEach(layer => {
-            const speed = layer.getAttribute("data-speed");
-            const x = (window.innerWidth - e.pageX * speed) / 100;
-            const y = (window.innerHeight - e.pageY * speed) / 100;
-
-            layer.style.transform = `translateX(${x}px) translateY(${y}px) rotate(${(x+y)/2}deg)`
-        })
-    }
-</script>
-
-<!--Bootsrap JavaScript -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
-
-<!--Own JavaScript -->
-<script type="text/javascript"  src="js/main.js"> </script>
-
-</body>
-
-</html>
+<% include Footer.ejs %>

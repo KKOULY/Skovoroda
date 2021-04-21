@@ -334,7 +334,7 @@ exports.ShopMenu_OneItem = ejs.compile("<div class=\"col-lg-4 col-md-6 col-sm-12
 exports.ShopCart_OneItem = ejs.compile("<div class=\"row m-0 d-flex align-items-center\">\r\n    <img src=\"<%= item.icon%>\" class=\"modal-image m-3\" style=\"width: 64px;height: 64px\">\r\n    <h4 class=\"modal-title ml-2\" style=\"max-width: 150px\"><%= item.title%><%if(size !== \"none\"){%>(<%=size%>)<%}%></h4>\r\n    <div class=\"btn-group btn-group-sm d-flex align-items-center ml-auto\" role=\"group\">\r\n        <button type=\"button\" class=\"close plus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-plus-circle\" viewBox=\"0 0 16 16\">\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z\"/>\r\n            </svg>\r\n        </button>\r\n        <input type=\"text\" class=\"text-center\" value=\"<%= quantity%>\">\r\n        <button type=\"button\" class=\"close minus d-flex align-items-center\" aria-label=\"Close\">\r\n            <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-dash-circle\" viewBox=\"0 0 16 16\">-->\r\n                <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n                <path d=\"M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z\"/>\r\n            </svg>\r\n        </button>\r\n    </div>\r\n    <button type=\"button\" class=\"close close-item ml-auto mr-3 d-flex align-items-center\" aria-label=\"Close\">\r\n        <svg xmlns=\"http://www.w3.org/2000/svg\" width=\"20\" height=\"20\" fill=\"currentColor\" class=\"bi bi-x-circle\" viewBox=\"0 0 16 16\">\r\n            <path d=\"M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z\"/>\r\n            <path d=\"M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z\"/>\r\n        </svg>\r\n    </button>\r\n</div>");
 
 // added template of a composition
-exports.Composition_OneItem = ejs.compile("<div class=\"card__item\">\n    <a href=\"http://localhost:5050/read<%= composition.id %>.html\">\n        <div class=\"card__inner\">\n            <div class=\"card__img\">\n                <img src=\"<%= composition.icon %>\" alt=\"images/library/14.jpg\">\n            </div>\n            <div class=\"card__text\">\n                <span class=\"composition-title\">\n                    <%= composition.title %>\n                </span>\n            </div>\n        </div>\n    </a>\n\n</div>")
+exports.Composition_OneItem = ejs.compile("<div class=\"card__item\">\r\n    <a href=\"http://localhost:5050/read<%= composition.id %>.html\">\r\n        <div class=\"card__inner\">\r\n            <div class=\"card__img\">\r\n                <img src=\"<%= composition.icon %>\" alt=\"images/library/14.jpg\">\r\n            </div>\r\n            <div class=\"card__text\">\r\n                <span class=\"composition-title\">\r\n                    <%= composition.title %>\r\n                </span>\r\n            </div>\r\n        </div>\r\n    </a>\r\n\r\n</div>")
 },{"ejs":10}],6:[function(require,module,exports){
 function initialise() {
     var Menu = require('./ShopMenu');
@@ -1959,34 +1959,29 @@ exports.cache = {
 
 },{}],12:[function(require,module,exports){
 module.exports={
-  "_args": [
-    [
-      "ejs@2.7.4",
-      "C:\\Users\\kmbs\\OneDrive - kmbs\\Документи\\GitHub\\Skovoroda"
-    ]
-  ],
-  "_from": "ejs@2.7.4",
+  "_from": "ejs@^2.4.1",
   "_id": "ejs@2.7.4",
   "_inBundle": false,
   "_integrity": "sha512-7vmuyh5+kuUyJKePhQfRQBhXV5Ce+RnaeeQArKu1EAMpL3WbgMt5WG6uQZpEVvYSSsxMXRKOewtDk9RaTKXRlA==",
   "_location": "/ejs",
   "_phantomChildren": {},
   "_requested": {
-    "type": "version",
+    "type": "range",
     "registry": true,
-    "raw": "ejs@2.7.4",
+    "raw": "ejs@^2.4.1",
     "name": "ejs",
     "escapedName": "ejs",
-    "rawSpec": "2.7.4",
+    "rawSpec": "^2.4.1",
     "saveSpec": null,
-    "fetchSpec": "2.7.4"
+    "fetchSpec": "^2.4.1"
   },
   "_requiredBy": [
     "/"
   ],
   "_resolved": "https://registry.npmjs.org/ejs/-/ejs-2.7.4.tgz",
-  "_spec": "2.7.4",
-  "_where": "C:\\Users\\kmbs\\OneDrive - kmbs\\Документи\\GitHub\\Skovoroda",
+  "_shasum": "48661287573dcc53e366c7a1ae52c3a120eec9ba",
+  "_spec": "ejs@^2.4.1",
+  "_where": "D:\\Homework\\Programming_2\\Skovoroda\\Skovoroda",
   "author": {
     "name": "Matthew Eernisse",
     "email": "mde@fleegix.org",
@@ -1995,7 +1990,9 @@ module.exports={
   "bugs": {
     "url": "https://github.com/mde/ejs/issues"
   },
+  "bundleDependencies": false,
   "dependencies": {},
+  "deprecated": false,
   "description": "Embedded JavaScript templates",
   "devDependencies": {
     "browserify": "^13.1.1",
