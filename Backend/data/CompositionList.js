@@ -137,37 +137,37 @@ const compositionList = [
     },
     {
         id: 23,
-        title: 'То яка ж та слава нині',
+        title: 'Розпошир удаль зір свій, як і розуму коло',
         icon: 'images/library/alt.jpg',
         text: 'c23.txt'
     },
     {
         id: 24,
-        title: "Вже хмара пройшла. Райдуга в небі грає",
+        title: "Ми тебе зовсім марнуєм",
         icon: 'images/library/alt.jpg',
         text: 'c24.txt'
     },
     {
         id: 25,
-        title: 'Бачачи життя осього горе',
+        title: 'О спокою наш коханий!',
         icon: 'images/library/alt.jpg',
         text: 'c25.txt'
     },
     {
         id: 26,
-        title: 'Гей ти, нудьго проклята! Ся докучлива печаль',
+        title: 'Їдеш, хочеш нас лишити?',
         icon: 'images/library/alt.jpg',
         text: 'c26.txt'
     },
     {
         id: 27,
-        title: 'Чистий можеш буть собою',
+        title: 'Підіймись на небеса — у версальський хоч би сад',
         icon: 'images/library/alt.jpg',
         text: 'c27.txt'
     },
     {
         id: 28,
-        title: 'Щастя, а де ти живеш? Горлиці, скажіте!',
+        title: 'Осінь нам приходить, а весна пройшла',
         icon: 'images/library/alt.jpg',
         text: 'c28.txt'
     }
