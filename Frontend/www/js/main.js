@@ -179,8 +179,40 @@ function initialiseCart() {
 
     $("#createOrderBtn").click(function () {
         function allValid() {
+            function validateEmail(email) {
+                const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+                return re.test(String(email).toLowerCase());
+            }
+            function validatePhoneNumber(phone) {
+                // const regex = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
+                const regex = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+                return regex.test(phone);
+            }
             // if($("#inputName").val().length>0 && $("#inputNumber").val().length>0 && $("#inputEmail").val().length>0) return true;
-            return true;
+            var flag = true
+            
+            $name = $("#InputName");
+            $name.removeClass("is-invalid");
+            if($name.val().length<1) {
+                $name.addClass("is-invalid");
+                flag = false;
+            }else $("#InputName").removeClass("is-invalid");
+
+            $email = $("#InputEmail");
+            $email.removeClass("is-invalid");
+            if(!validateEmail($email.val())) {
+                $email.addClass("is-invalid");
+                flag = false;
+            }else $email.removeClass("is-invalid");
+
+            $phone = $("#InputNumber");
+            $phone.removeClass("is-invalid");
+            if(!validatePhoneNumber($phone.val())) {
+                $phone.addClass("is-invalid");
+                flag = false;
+            }else $phone.removeClass("is-invalid");
+
+            return flag;
         }
         if(allValid()){
             console.log("dsds");
