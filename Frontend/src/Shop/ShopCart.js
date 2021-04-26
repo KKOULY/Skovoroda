@@ -181,7 +181,7 @@ function updateCart() {
         $cart.append($node);
     }
     Cart.forEach(showOneItemInCart);
-    $totalPrice.text(" "+totalSum.toString()+"$");
+    $totalPrice.text(" "+totalSum.toString()+"₴");
     $(".order-count").text(Cart.length.toString());
 
 }
