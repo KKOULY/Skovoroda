@@ -39,7 +39,7 @@ exports.readPage = function (req, res) {
     try {
         text = fs.readFileSync(__dirname + pathToTextFile, 'utf-8');
     } catch (err) {
-        text = err;
+        text = 'Упс... Твору не знайдено :(';
     }
 
     res.render('readPage', {
